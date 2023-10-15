@@ -34,15 +34,13 @@ const sinQuestions = [
 validQuestions = sinQuestions
 validAnswers = setAnswers(validQuestions);
 
+
 function setAnswers(questions){
 
    let answers = [];
 
-    for(let i = 0; i < questions.length; i++){
-
-        if(!answers.includes(questions[i].answer)){
-            answers.push(questions[i].answer)
-        }
+    for(let i = 0; i < questions.length; i++){ 
+        answers.push(questions[i].answer) 
     }
     return answers
 }
@@ -54,17 +52,27 @@ function selectQuestion(){
 function setButtons(question, answers){
 
     let possibleAnswers = []
+
     possibleAnswers.push(question.answer)
+    answers = answers.filter(item => !possibleAnswers.includes(item))
+
     possibleAnswers.push(answers[Math.floor(Math.random() * answers.length)])
-    answers.filter(item => !possibleAnswers.includes(item))
+    answers = answers.filter(item => !possibleAnswers.includes(item))
+
     possibleAnswers.push(answers[Math.floor(Math.random() * answers.length)])
-    answers.filter(item => !possibleAnswers.includes(item))
+    answers = answers.filter(item => !possibleAnswers.includes(item))
+
     possibleAnswers.push(answers[Math.floor(Math.random() * answers.length)])
+
+    console.log(possibleAnswers)
 
     for (let i = possibleAnswers.length - 1; i > 0; i--) {
         const j = Math.floor(Math.random() * (i + 1));
         [possibleAnswers[i], possibleAnswers[j]] = [possibleAnswers[j], possibleAnswers[i]];
     }
+
+    
+
 
     document.getElementById("button0").innerHTML = possibleAnswers[0]
     document.getElementById("button1").innerHTML = possibleAnswers[1]
@@ -82,26 +90,16 @@ function displayQuestion(question)
 let myQuestion = selectQuestion()
 setButtons(myQuestion, validAnswers)
 displayQuestion(myQuestion)
+console.log(myQuestion.answer)
 
 
+document.getElementById("button0").onclick = function(){
 
-document.getElementById("button0").onclick = function(question){
+    let buttonAnswer = document.getElementById("button0").textContent
+    let correctAnswer = myQuestion.answer
 
-    let buttonAnswer = document.getElementById("button0").value
-    let correctAnswer = question.answer
-
-    if(buttonAnswer == correctAnswer){
-        document.getElementById("correct").innerHTML = "correct"
-    }
-    else{
-        document.getElementById("correct").innerHTML = "incorrect"
-    }
-}
-
-document.getElementById("button1").onclick = function(question){
-
-    let buttonAnswer = document.getElementById("button1").value
-    let correctAnswer = question.answer
+    console.log(buttonAnswer)
+    console.log(correctAnswer)
 
     if(buttonAnswer == correctAnswer){
         document.getElementById("correct").innerHTML = "correct"
@@ -111,10 +109,10 @@ document.getElementById("button1").onclick = function(question){
     }
 }
 
-document.getElementById("button2").onclick = function(question){
+document.getElementById("button1").onclick = function(){
 
-    let buttonAnswer = document.getElementById("button2").value
-    let correctAnswer = question.answer
+    let buttonAnswer = document.getElementById("button1").textContent
+    let correctAnswer = myQuestion.answer
 
     if(buttonAnswer == correctAnswer){
         document.getElementById("correct").innerHTML = "correct"
@@ -124,10 +122,25 @@ document.getElementById("button2").onclick = function(question){
     }
 }
 
-document.getElementById("button3").onclick = function(question){
+document.getElementById("button2").onclick = function(){
 
-    let buttonAnswer = document.getElementById("button3").value
-    let correctAnswer = question.answer
+    let buttonAnswer = document.getElementById("button2").textContent
+    let correctAnswer = myQuestion.answer
+
+    if(buttonAnswer == correctAnswer){
+        document.getElementById("correct").innerHTML = "correct"
+    }
+    else{
+        document.getElementById("correct").innerHTML = "incorrect"
+    }
+}
+
+document.getElementById("button3").onclick = function(){
+
+    let buttonAnswer = document.getElementById("button3").textContent
+    let correctAnswer = myQuestion.answer
+
+
 
     if(buttonAnswer == correctAnswer){
         document.getElementById("correct").innerHTML = "correct"
@@ -139,9 +152,11 @@ document.getElementById("button3").onclick = function(question){
 
 
 document.getElementById("continue").onclick = function(){
+    document.getElementById("correct").innerHTML = ""
     myQuestion = selectQuestion()
     setButtons(myQuestion, validAnswers)
     displayQuestion(myQuestion)
-
+    console.log(myQuestion.answer)
+    document.getElementById("test").innerHTML = myQuestion.answer
 }
 
