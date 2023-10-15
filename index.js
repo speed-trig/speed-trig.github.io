@@ -157,6 +157,6 @@ document.getElementById("continue").onclick = function(){
     setButtons(myQuestion, validAnswers)
     displayQuestion(myQuestion)
     console.log(myQuestion.answer)
-    document.getElementById("test").innerHTML = myQuestion.answer
+
 }
 
