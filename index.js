@@ -161,7 +161,6 @@ function setButtons(question, answers){
 
     possibleAnswers.push(answers[Math.floor(Math.random() * answers.length)])
 
-    console.log(possibleAnswers)
 
     for (let i = possibleAnswers.length - 1; i > 0; i--) {
         const j = Math.floor(Math.random() * (i + 1));
@@ -180,69 +179,27 @@ function setButtons(question, answers){
 
 function displayQuestion(question)
 {   
-    let text = question.trig + "(" + question.angle + ")"
+    let angle = question.angle
+
+    if(document.getElementById("degrees").checked == true && document.getElementById("radians").checked == true){
+        if(Math.random() < 0.5)
+            angle = toRadians(angle).replace(/1/g, "")
+    }
+
+    else if(document.getElementById("radians").checked == true){
+        angle = toRadians(angle).replace(/1/g, "")
+    }
+
+    let text = question.trig + "(" + angle + ")"
     document.getElementById("question").innerHTML = text
 }
 
 let myQuestion = selectQuestion()
 setButtons(myQuestion, validAnswers)
 displayQuestion(myQuestion)
-console.log(myQuestion.answer)
-
-
-document.getElementById("button0").onclick = function(){
-
-    let buttonAnswer = document.getElementById("button0").textContent
-    let correctAnswer = myQuestion.answer
-
-    if(buttonAnswer == correctAnswer){
-        document.getElementById("correct").innerHTML = "correct"
-    }
-    else{
-        document.getElementById("correct").innerHTML = "incorrect"
-    }
-}
-
-document.getElementById("button1").onclick = function(){
-
-    let buttonAnswer = document.getElementById("button1").textContent
-    let correctAnswer = myQuestion.answer
-
-    if(buttonAnswer == correctAnswer){
-        document.getElementById("correct").innerHTML = "correct"
-    }
-    else{
-        document.getElementById("correct").innerHTML = "incorrect"
-    }
-}
-
-document.getElementById("button2").onclick = function(){
-
-    let buttonAnswer = document.getElementById("button2").textContent
-    let correctAnswer = myQuestion.answer
-
-    if(buttonAnswer == correctAnswer){
-        document.getElementById("correct").innerHTML = "correct"
-    }
-    else{
-        document.getElementById("correct").innerHTML = "incorrect"
-    }
-}
-
-document.getElementById("button3").onclick = function(){
-
-    let buttonAnswer = document.getElementById("button3").textContent
-    let correctAnswer = myQuestion.answer
 
 
 
-    if(buttonAnswer == correctAnswer){
-        document.getElementById("correct").innerHTML = "correct"
-    }
-    else{
-        document.getElementById("correct").innerHTML = "incorrect"
-    }
-}
 
 document.getElementById("update").onclick = function(){
 
@@ -267,8 +224,44 @@ document.getElementById("update").onclick = function(){
         validQuestions = validQuestions.concat(cscQuestions)
     }
 
+    validAnswers = setAnswers(validQuestions);
+
     nextQuestion()
 
+}
+
+function buttonAnswerClick(buttonName){
+    let buttonAnswer = document.getElementById(buttonName).textContent
+    let correctAnswer = myQuestion.answer
+
+    if(buttonAnswer == correctAnswer){
+        document.getElementById("correct").innerHTML = "correct"
+    }
+    else{
+        document.getElementById("correct").innerHTML = "incorrect"
+    }
+}
+
+
+function toRadians(degree){
+
+    if(degree == 0)
+        return "0"
+
+    else if(degree % 180 == 0)
+        return degree/180 + "π"
+
+    else if(degree % 90 == 0)
+        return degree/90 + "π/2"
+
+    else if(degree % 60 == 0)
+        return degree/60 + "π/3"
+
+    else if(degree % 45 == 0)
+        return degree/45 + "π/4"
+
+    else if(degree % 30 == 0)
+        return degree/30 + "π/6"
 }
 
 
@@ -277,7 +270,6 @@ function nextQuestion(){
     myQuestion = selectQuestion()
     setButtons(myQuestion, validAnswers)
     displayQuestion(myQuestion)
-    console.log(myQuestion.answer)
 
 }
 

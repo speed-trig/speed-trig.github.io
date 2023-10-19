@@ -13,10 +13,14 @@
 
     <h3 id="question"></h3>
 
-    <button id="button0"></button>
-    <button id="button1"></button>
-    <button id="button2"></button>
-    <button id="button3"></button>
+    <div id="answerButtons">
+        <button id="button0" onclick="buttonAnswerClick(id)"></button>
+        <button id="button1" onclick="buttonAnswerClick(id)"></button>
+        <button id="button2" onclick="buttonAnswerClick(id)"></button>
+        <button id="button3" onclick="buttonAnswerClick(id)"></button>
+    </div>
+
+
 
     <br>
 
@@ -30,12 +34,12 @@
     <h4>Settings</h4>
     
 
-    <label for="sin">sin</label>
-    <input type="checkbox" id="sin" checked="true">
+    <label for="sin">sin</label><input type="checkbox" id="sin" checked="true">    
+    <label style="margin-left: 40px;" for="degrees">degrees</label><input type="checkbox" id="degrees" checked="true">
     <br>
 
-    <label for="cos">cos</label>
-    <input type="checkbox" id="cos" checked="true">
+    <label for="cos">cos</label><input type="checkbox" id="cos" checked="true">
+    <label style="margin-left: 40px;" for="radians">radians</label><input type="checkbox" id="radians" checked="true">
     <br>
 
     <label for="tan">tan</label>
