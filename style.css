@@ -1,0 +1,20 @@
+
+
+#questionsAndAnswers{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    flex-direction: column;
+}
+
+#settings{
+    position: absolute;
+    top: -50px;
+    right: 50px;
+}
+
+
+#answerButtons button{
+    width: 100px;
+}

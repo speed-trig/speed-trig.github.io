@@ -6,64 +6,78 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <h1>Speed Trig Practice Game</h1>
-    <p>Play the speed trig game</p>
 
-    <br>
+    <div id="questionsAndAnswers">
+        <h1>Speed Trig Practice Game</h1>
+        <p>Play the speed trig game</p>
 
-    <h3 id="question"></h3>
+        <br>
 
-    <div id="answerButtons">
-        <button id="button0" onclick="buttonAnswerClick(id)"></button>
-        <button id="button1" onclick="buttonAnswerClick(id)"></button>
-        <button id="button2" onclick="buttonAnswerClick(id)"></button>
-        <button id="button3" onclick="buttonAnswerClick(id)"></button>
+        <h3 id="question"></h3>
+
+        <div id="answerButtons">
+            <table border="1">
+                <tr>
+                    <td><button id="button0" onclick="buttonAnswerClick(id)"></button></td>
+                    <td><button id="button1" onclick="buttonAnswerClick(id)"></button></td>
+                    <td><button id="button2" onclick="buttonAnswerClick(id)"></button></td>
+                    <td><button id="button3" onclick="buttonAnswerClick(id)"></button></td>
+                </tr>
+                <tr>
+                    <td><button id="button4" onclick="buttonAnswerClick(id)"></button></td>
+                    <td><button id="button5" onclick="buttonAnswerClick(id)"></button></td>
+                    <td><button id="button6" onclick="buttonAnswerClick(id)"></button></td>
+                    <td><button id="button7" onclick="buttonAnswerClick(id)"></button></td>
+                </tr>
+            </table>
+        </div>
+
+
+
+        <h3 id="correct"></h3>
+
+        
+
+        <button id="continue" onclick="nextQuestion()">Next Question</button>
+
     </div>
+    <div id="settings">
 
+        <br><br><br>
+        <h4>Settings</h4>
+        
 
+        <label for="sin">sin</label><input type="checkbox" id="sin" checked="true">    
+        <label style="margin-left: 40px;" for="degrees">degrees</label><input type="checkbox" id="degrees" checked="true">
+        <br>
 
-    <br>
+        <label for="cos">cos</label><input type="checkbox" id="cos" checked="true">
+        <label style="margin-left: 40px;" for="radians">radians</label><input type="checkbox" id="radians" checked="true">
+        <br>
 
-    <h3 id="correct"></h3>
+        <label for="tan">tan</label>
+        <input type="checkbox" id="tan">
+        <br>
 
-    <br>
+        <label for="csc">csc</label>
+        <input type="checkbox" id="csc">
+        <br>
 
-    <button id="continue" onclick="nextQuestion()">Next Question</button>
+        <label for="sec">sec</label>
+        <input type="checkbox" id="sec">
+        <br>
 
-    <br><br><br>
-    <h4>Settings</h4>
+        <label for="cot">cot</label>
+        <input type="checkbox" id="cot">
+        <br>
+        <br>
+
+        <button id="update">Update</button>
+
+        <h3 id="test"></h3>
     
-
-    <label for="sin">sin</label><input type="checkbox" id="sin" checked="true">    
-    <label style="margin-left: 40px;" for="degrees">degrees</label><input type="checkbox" id="degrees" checked="true">
-    <br>
-
-    <label for="cos">cos</label><input type="checkbox" id="cos" checked="true">
-    <label style="margin-left: 40px;" for="radians">radians</label><input type="checkbox" id="radians" checked="true">
-    <br>
-
-    <label for="tan">tan</label>
-    <input type="checkbox" id="tan">
-    <br>
-
-    <label for="csc">csc</label>
-    <input type="checkbox" id="csc">
-    <br>
-
-    <label for="sec">sec</label>
-    <input type="checkbox" id="sec">
-    <br>
-
-    <label for="cot">cot</label>
-    <input type="checkbox" id="cot">
-    <br>
-    <br>
-
-    <button id="update">Update</button>
-
-    <h3 id="test"></h3>
-
-
+    </div>
+    
     <script src="index.js"></script>
 
 </body>

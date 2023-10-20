@@ -12,7 +12,6 @@ class Question{
 
 }
 
-
 const sinQuestions = [
     new Question("sin", 0, "0"),
     new Question("sin", 30, "1/2"),
@@ -127,10 +126,17 @@ const cscQuestions = [
     new Question("csc", 330, "-2")
 ]
 
-let validQuestions = sinQuestions
-validQuestions = validQuestions.concat(cosQuestions)
-validAnswers = setAnswers(validQuestions);
+let validQuestions
+let validAnswers
 
+function setDefaults(){
+    validQuestions = sinQuestions
+    validQuestions = validQuestions.concat(cosQuestions)
+    validAnswers = setAnswers(validQuestions);
+    myQuestion = selectQuestion()
+    setButtons(myQuestion, validAnswers)
+    displayQuestion(myQuestion)
+}
 
 function setAnswers(questions){
 
@@ -153,28 +159,24 @@ function setButtons(question, answers){
     possibleAnswers.push(question.answer)
     answers = answers.filter(item => !possibleAnswers.includes(item))
 
-    possibleAnswers.push(answers[Math.floor(Math.random() * answers.length)])
-    answers = answers.filter(item => !possibleAnswers.includes(item))
-
-    possibleAnswers.push(answers[Math.floor(Math.random() * answers.length)])
-    answers = answers.filter(item => !possibleAnswers.includes(item))
-
-    possibleAnswers.push(answers[Math.floor(Math.random() * answers.length)])
-
+    for(let i = 0; i < 8; i++){
+        possibleAnswers.push(answers[Math.floor(Math.random() * answers.length)])
+        answers = answers.filter(item => !possibleAnswers.includes(item))
+    }
 
     for (let i = possibleAnswers.length - 1; i > 0; i--) {
         const j = Math.floor(Math.random() * (i + 1));
         [possibleAnswers[i], possibleAnswers[j]] = [possibleAnswers[j], possibleAnswers[i]];
     }
 
-    
+    //possibleAnswers.sort()
 
+    let answerButtons = document.getElementById("answerButtons").getElementsByTagName("button")
 
-    document.getElementById("button0").innerHTML = possibleAnswers[0]
-    document.getElementById("button1").innerHTML = possibleAnswers[1]
-    document.getElementById("button2").innerHTML = possibleAnswers[2]
-    document.getElementById("button3").innerHTML = possibleAnswers[3]
-   
+    for(let i = 0; i < answerButtons.length; i++){
+        answerButtons[i].innerHTML = possibleAnswers[i]
+    }
+
 }
 
 function displayQuestion(question)
@@ -193,13 +195,6 @@ function displayQuestion(question)
     let text = question.trig + "(" + angle + ")"
     document.getElementById("question").innerHTML = text
 }
-
-let myQuestion = selectQuestion()
-setButtons(myQuestion, validAnswers)
-displayQuestion(myQuestion)
-
-
-
 
 document.getElementById("update").onclick = function(){
 
@@ -242,7 +237,6 @@ function buttonAnswerClick(buttonName){
     }
 }
 
-
 function toRadians(degree){
 
     if(degree == 0)
@@ -264,7 +258,6 @@ function toRadians(degree){
         return degree/30 + "π/6"
 }
 
-
 function nextQuestion(){
     document.getElementById("correct").innerHTML = ""
     myQuestion = selectQuestion()
@@ -272,4 +265,6 @@ function nextQuestion(){
     displayQuestion(myQuestion)
 
 }
+
+setDefaults()
 
