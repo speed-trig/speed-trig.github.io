@@ -129,6 +129,11 @@ const cscQuestions = [
 let validQuestions
 let validAnswers
 
+let correctAnswerScore = 0;
+let incorrectAnswerScore = 0;
+let totalQuestions = 0;
+let averageScore = 0;
+
 function setDefaults(){
     validQuestions = sinQuestions
     validQuestions = validQuestions.concat(cosQuestions)
@@ -159,7 +164,7 @@ function setButtons(question, answers){
     possibleAnswers.push(question.answer)
     answers = answers.filter(item => !possibleAnswers.includes(item))
 
-    for(let i = 0; i < 8; i++){
+    for(let i = 0; i < 7; i++){
         possibleAnswers.push(answers[Math.floor(Math.random() * answers.length)])
         answers = answers.filter(item => !possibleAnswers.includes(item))
     }
@@ -231,10 +236,23 @@ function buttonAnswerClick(buttonName){
 
     if(buttonAnswer == correctAnswer){
         document.getElementById("correct").innerHTML = "correct"
+        correctAnswerScore += 1;
+        document.getElementById("correctAnswerScore").innerHTML = correctAnswerScore
     }
     else{
         document.getElementById("correct").innerHTML = "incorrect"
+        incorrectAnswerScore += 1;
+        document.getElementById("incorrectAnswerScore").innerHTML = incorrectAnswerScore
     }
+
+    totalQuestions += 1;
+    averageScore = correctAnswerScore/totalQuestions;
+
+    document.getElementById("totalQuestions").innerHTML = totalQuestions
+    document.getElementById("averageScore").innerHTML = averageScore
+
+    nextQuestion();
+
 }
 
 function toRadians(degree){

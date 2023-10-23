@@ -7,6 +7,8 @@
 </head>
 <body>
 
+   
+
     <div id="questionsAndAnswers">
         <h1>Speed Trig Practice Game</h1>
         <p>Play the speed trig game</p>
@@ -38,7 +40,7 @@
 
         
 
-        <button id="continue" onclick="nextQuestion()">Next Question</button>
+        <button id="continue" onclick="nextQuestion()">Skip Question</button>
 
     </div>
     <div id="settings">
@@ -76,6 +78,27 @@
 
         <h3 id="test"></h3>
     
+    </div>
+
+
+    <div class="score">
+        <label for="correctAnswerScore">Correct Answers: </label>
+        <h3 id="correctAnswerScore">0</h3>
+    </div>
+
+    <div class="score">
+        <label for="incorrectAnswerScore">Incorrect Answers: </label>
+        <h3 id="incorrectAnswerScore">0</h3>
+    </div>
+
+    <div class="score">
+        <label for="totalQuestions">Total Questions: </label>
+        <h3 id="totalQuestions">0</h3>
+    </div>
+
+    <div class="score">
+        <label for="averageScore">Average Score: </label>
+        <h3 id="averageScore">0</h3>
     </div>
     
     <script src="index.js"></script>

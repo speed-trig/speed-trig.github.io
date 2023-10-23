@@ -1,4 +1,19 @@
-
+.score {
+    display: flex;
+    align-items: center;
+    margin-bottom: -30px;
+}
+  
+.score label {
+    font-family: Arial, sans-serif;
+    font-weight: bold; 
+    margin-right: 10px;
+}
+  
+.score h3 {
+    font-family: Arial, sans-serif;
+  
+}
 
 #questionsAndAnswers{
     display: flex;
