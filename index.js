@@ -126,6 +126,30 @@ const cscQuestions = [
     new Question("csc", 330, "-2")
 ]
 
+const invSinQuestions = [
+    new Question("invSin", "0", 0),
+    new Question("invSin", "1/2", 30),
+    new Question("invSin", "√2/2", 45),
+    new Question("invSin", "√3/2", 60),
+    new Question("invSin", "1", 90),
+    new Question("invSin", "-1", -90),
+    new Question("invSin", "-1/2", -30),
+    new Question("invSin", "-√2/2", -45),
+    new Question("invSin", "-√3/2", -60)
+]
+
+const invCosQuestions = [
+    new Question("invCos", "0", 90),
+    new Question("invCos", "1/2", 60),
+    new Question("invCos", "√2/2", 45),
+    new Question("invCos", "√3/2", 30),
+    new Question("invCos", "1", 0),
+    new Question("invCos", "-1", 180),
+    new Question("invCos", "-1/2", 120),
+    new Question("invCos", "-√2/2", 135),
+    new Question("invCos", "-√3/2", 150)
+]
+
 let validQuestions
 let validAnswers
 
@@ -137,20 +161,51 @@ let averageScore = 0;
 function setDefaults(){
     validQuestions = sinQuestions
     validQuestions = validQuestions.concat(cosQuestions)
-    validAnswers = setAnswers(validQuestions);
     myQuestion = selectQuestion()
+    validAnswers = setAnswers(myQuestion)
     setButtons(myQuestion, validAnswers)
     displayQuestion(myQuestion)
 }
 
-function setAnswers(questions){
+function setAnswers(question){
 
-   let answers = [];
+    let typeOfQuestion = question.trig
+    let questions
+
+    switch (typeOfQuestion){
+        case "sin":
+            questions = sinQuestions
+            break
+        case "cos":
+            questions = cosQuestions
+            break
+        case "tan":
+            questions = tanQuestions
+            break
+        case "cot":
+            questions = cotQuestions
+            break
+        case "sec":
+            questions = secQuestions
+            break
+        case "csc":
+            questions = cscQuestions
+            break
+        case "invCos":
+            questions = invCosQuestions
+            break
+        case "invSin":
+            questions = invSinQuestions
+            break
+    }
+
+    let answers = [];
 
     for(let i = 0; i < questions.length; i++){ 
         answers.push(questions[i].answer) 
     }
-    return answers
+
+    return answers;
 }
 
 function selectQuestion(){
@@ -176,6 +231,22 @@ function setButtons(question, answers){
 
     //possibleAnswers.sort()
 
+    if (question.trig == "invSin" || question.trig == "invCos"){
+
+        if(document.getElementById("degrees").checked == true && document.getElementById("radians").checked == true){
+            if(Math.random() < 0.5)
+                for(let i = 0; i < possibleAnswers.length; i++){
+                   possibleAnswers[i] = toRadians(possibleAnswers[i])
+                }
+        }
+
+        else if(document.getElementById("radians").checked == true){
+            for(let i = 0; i < possibleAnswers.length; i++){
+                possibleAnswers[i] = toRadians(possibleAnswers[i])
+            }
+        }
+    }
+
     let answerButtons = document.getElementById("answerButtons").getElementsByTagName("button")
 
     for(let i = 0; i < answerButtons.length; i++){
@@ -188,17 +259,36 @@ function displayQuestion(question)
 {   
     let angle = question.angle
 
-    if(document.getElementById("degrees").checked == true && document.getElementById("radians").checked == true){
-        if(Math.random() < 0.5)
-            angle = toRadians(angle).replace(/1/g, "")
-    }
+    if (question.trig == "invSin"){
+        
+        let text = "sin<sup>-1</sup>(" + angle + ")"
+        document.getElementById("question").innerHTML = text
 
-    else if(document.getElementById("radians").checked == true){
-        angle = toRadians(angle).replace(/1/g, "")
     }
+    
+    else if (question.trig == "invCos"){
+        
+        let text = "cos<sup>-1</sup>(" + angle + ")"
+        document.getElementById("question").innerHTML = text
 
-    let text = question.trig + "(" + angle + ")"
-    document.getElementById("question").innerHTML = text
+    } 
+
+    else{
+        
+
+        if(document.getElementById("degrees").checked == true && document.getElementById("radians").checked == true){
+            if(Math.random() < 0.5)
+                angle = toRadians(angle)
+        }
+
+        else if(document.getElementById("radians").checked == true){
+            angle = toRadians(angle)
+        }
+
+        let text = question.trig + "(" + angle + ")"
+        document.getElementById("question").innerHTML = text
+    }
+    
 }
 
 document.getElementById("update").onclick = function(){
@@ -223,9 +313,12 @@ document.getElementById("update").onclick = function(){
     if(document.getElementById("csc").checked){
         validQuestions = validQuestions.concat(cscQuestions)
     }
-
-    validAnswers = setAnswers(validQuestions);
-
+    if(document.getElementById("invSin").checked){
+        validQuestions = validQuestions.concat(invSinQuestions)
+    }
+    if(document.getElementById("invCos").checked){
+        validQuestions = validQuestions.concat(invCosQuestions)
+    }
     nextQuestion()
 
 }
@@ -233,6 +326,10 @@ document.getElementById("update").onclick = function(){
 function buttonAnswerClick(buttonName){
     let buttonAnswer = document.getElementById(buttonName).textContent
     let correctAnswer = myQuestion.answer
+
+    if (buttonAnswer.includes("π")){
+        correctAnswer = toRadians(correctAnswer)
+    }
 
     if(buttonAnswer == correctAnswer){
         document.getElementById("correct").innerHTML = "correct"
@@ -261,24 +358,25 @@ function toRadians(degree){
         return "0"
 
     else if(degree % 180 == 0)
-        return degree/180 + "π"
+        return (degree/180 + "π").replace(/1/g, "")
 
     else if(degree % 90 == 0)
-        return degree/90 + "π/2"
+        return (degree/90 + "π/2").replace(/1/g, "")
 
     else if(degree % 60 == 0)
-        return degree/60 + "π/3"
+        return (degree/60 + "π/3").replace(/1/g, "")
 
     else if(degree % 45 == 0)
-        return degree/45 + "π/4"
+        return (degree/45 + "π/4").replace(/1/g, "")
 
     else if(degree % 30 == 0)
-        return degree/30 + "π/6"
+        return (degree/30 + "π/6").replace(/1/g, "")
 }
 
 function nextQuestion(){
     document.getElementById("correct").innerHTML = ""
     myQuestion = selectQuestion()
+    validAnswers = setAnswers(myQuestion)
     setButtons(myQuestion, validAnswers)
     displayQuestion(myQuestion)
 

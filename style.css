@@ -1,17 +1,36 @@
+#all{
+    display: flex;
+    align-items: center;
+    border: 30px;
+    border-color: black;
+    flex-wrap: wrap;
+}
+
+.scoreBoard{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+
+    /*background-color: aquamarine;*/
+    height: 250px;
+    width: 25%;
+    min-width: 250px;
+}
+
 .score {
     display: flex;
     align-items: center;
-    margin-bottom: -30px;
+
 }
   
 .score label {
     font-family: Arial, sans-serif;
     font-weight: bold; 
-    margin-right: 10px;
 }
   
 .score h3 {
     font-family: Arial, sans-serif;
+    margin-left: 10px;
   
 }
 
@@ -21,12 +40,17 @@
     align-items: center;
     text-align: center;
     flex-direction: column;
+    /*background-color: aqua;*/
+    width: 50%;
+    min-width: 500px;
 }
 
 #settings{
-    position: absolute;
-    top: -50px;
-    right: 50px;
+    /*background-color: bisque;*/
+    width: 15%;
+    min-width: 200px;
+    margin-left: 10%;
+
 }
 
 
