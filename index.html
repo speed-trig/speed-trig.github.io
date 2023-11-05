@@ -9,27 +9,18 @@
 
     <div id="all">
 
-        <div class="scoreBoard">
-            <div class="score">
-                <label for="correctAnswerScore">Correct Answers:  </label>
-                <h3 id="correctAnswerScore">0</h3>
-            </div>
+        <div id="scoreBoard">
+  
+            <p id="timer">00:00</p>
 
-            <div class="score">
-                <label for="incorrectAnswerScore">Incorrect Answers:  </label>
-                <h3 id="incorrectAnswerScore">0</h3>
-            </div>
+            <p id="myScore">0/0</p>
 
-            <div class="score">
-                <label for="totalQuestions">Total Questions:  </label>
-                <h3 id="totalQuestions">0</h3>
-            </div>
+            <p id="accuracy">0%</p>
+            <button id="reset">Reset</button>
 
-            <div class="score">
-                <label for="averageScore">Average Score:  </label>
-                <h3 id="averageScore">0</h3>
-            </div>
         </div>
+
+
 
         <div id="questionsAndAnswers">
             <h1>Speed Trig Practice Game</h1>
@@ -68,48 +59,70 @@
             <h4>Settings</h4>
             
 
-            <label for="sin">sin</label><input type="checkbox" id="sin" checked="true">    
-            <label style="margin-left: 40px;" for="degrees">degrees</label><input type="checkbox" id="degrees" checked="true">
+            <label for="sin">sin</label>
+            <input type="checkbox" id="sin" checked="true" onchange="updateValidQuestions()">    
+
+            <label style="margin-left: 40px;" for="invSin">sin<sup>-1</sup></label>
+            <input type="checkbox" id="invSin" onchange="updateValidQuestions()">
+
             <br>
 
-            <label for="cos">cos</label><input type="checkbox" id="cos" checked="true">
-            <label style="margin-left: 40px;" for="radians">radians</label><input type="checkbox" id="radians" checked="true">
+            <label for="cos">cos</label>
+            <input type="checkbox" id="cos" checked="true" onchange="updateValidQuestions()">
+
+            <label style="margin-left: 40px;" for="invCos">cos<sup>-1</sup></label>
+            <input type="checkbox" id="invCos" onchange="updateValidQuestions()">
+            
             <br>
 
             <label for="tan">tan</label>
-            <input type="checkbox" id="tan">
+            <input type="checkbox" id="tan" onchange="updateValidQuestions()">
             <br>
 
             <label for="csc">csc</label>
-            <input type="checkbox" id="csc">
+            <input type="checkbox" id="csc" onchange="updateValidQuestions()">
             <br>
 
             <label for="sec">sec</label>
-            <input type="checkbox" id="sec">
+            <input type="checkbox" id="sec" onchange="updateValidQuestions()">
             <br>
 
             <label for="cot">cot</label>
-            <input type="checkbox" id="cot">
+            <input type="checkbox" id="cot" onchange="updateValidQuestions()">
+
+            <br><br><br><br>
+
+            <label for="degrees">degrees</label>
+            <input type="checkbox" id="degrees" checked="true">
             <br>
 
-            <label for="invSin">sin<sup>-1</sup></label>
-            <input type="checkbox" id="invSin">
+            <label for="radians">radians</label>
+            <input type="checkbox" id="radians" checked="true">
+
+            <br><br><br><br>
+
+            <label for="showTimer">Show timer</label>
+            <input type="checkbox" id="showTimer" checked="true">
             <br>
 
-            <label for="invCos">cos<sup>-1</sup></label>
-            <input type="checkbox" id="invCos">
-
-
-            <br>
+            <label for="showScoreboard">Show score</label>
+            <input type="checkbox" id="showScoreboard" checked="true">
             <br>
 
-            <button id="update">Update</button>
+            <!--
+            <label for="feedback">Display correct answer</label>
+            <input type="checkbox" id="feedback">
+            -->
+
+            <br><br>
+
+            <button id="selectAll">Select All</button>
 
             <h3 id="test"></h3>
         
         </div>
     </div>
-    
+
     <script src="index.js"></script>
 
 </body>

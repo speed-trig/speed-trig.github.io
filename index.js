@@ -154,9 +154,11 @@ let validQuestions
 let validAnswers
 
 let correctAnswerScore = 0;
-let incorrectAnswerScore = 0;
 let totalQuestions = 0;
-let averageScore = 0;
+let accuracy = 0;
+
+let seconds = 0;
+let timeInterval
 
 function setDefaults(){
     validQuestions = sinQuestions
@@ -291,7 +293,7 @@ function displayQuestion(question)
     
 }
 
-document.getElementById("update").onclick = function(){
+function updateValidQuestions(){
 
     validQuestions = [];
 
@@ -319,8 +321,35 @@ document.getElementById("update").onclick = function(){
     if(document.getElementById("invCos").checked){
         validQuestions = validQuestions.concat(invCosQuestions)
     }
-    nextQuestion()
+}
 
+document.getElementById("showTimer").onchange = function(){
+
+    if(document.getElementById("showTimer").checked){
+        document.getElementById("timer").style.visibility = "visible"
+    }
+    else{
+        document.getElementById("timer").style.visibility = "hidden"
+    }
+}
+
+document.getElementById("showScoreboard").onchange = function(){
+
+    if(document.getElementById("showScoreboard").checked){
+        document.getElementById("myScore").style.visibility = "visible"
+        document.getElementById("accuracy").style.visibility = "visible"
+    }
+    else{
+        document.getElementById("myScore").style.visibility = "hidden"
+        document.getElementById("accuracy").style.visibility = "hidden"
+    }
+}
+
+document.getElementById("selectAll").onclick = function(){
+    const checkboxes = document.querySelectorAll('div#settings input[type="checkbox"]');
+    checkboxes.forEach((checkbox) => {checkbox.checked = true;})
+
+    updateValidQuestions()
 }
 
 function buttonAnswerClick(buttonName){
@@ -334,19 +363,16 @@ function buttonAnswerClick(buttonName){
     if(buttonAnswer == correctAnswer){
         document.getElementById("correct").innerHTML = "correct"
         correctAnswerScore += 1;
-        document.getElementById("correctAnswerScore").innerHTML = correctAnswerScore
     }
     else{
         document.getElementById("correct").innerHTML = "incorrect"
-        incorrectAnswerScore += 1;
-        document.getElementById("incorrectAnswerScore").innerHTML = incorrectAnswerScore
     }
 
     totalQuestions += 1;
-    averageScore = correctAnswerScore/totalQuestions;
+    accuracy = 100 * correctAnswerScore/totalQuestions;
 
-    document.getElementById("totalQuestions").innerHTML = totalQuestions
-    document.getElementById("averageScore").innerHTML = averageScore
+    document.getElementById("myScore").innerHTML = correctAnswerScore + "/" + totalQuestions
+    document.getElementById("accuracy").innerHTML = accuracy + "%"
 
     nextQuestion();
 
@@ -381,6 +407,33 @@ function nextQuestion(){
     displayQuestion(myQuestion)
 
 }
+
+function startTimer() {
+
+    timeInterval = setInterval(() => {
+        seconds++;
+        minutes = Math.floor(seconds / 60);
+        remainderSeconds = seconds % 60;
+        display = `${minutes}:${remainderSeconds < 10 ? '0' : ''}${remainderSeconds}`;
+        document.getElementById('timer').textContent = display;
+    }   , 1000);
+}
+
+document.getElementById("reset").onclick = function(){
+    correctAnswerScore = 0
+    totalQuestions = 0
+    accuracy = 0
+    document.getElementById("accuracy").innerHTML = accuracy + "%"
+    document.getElementById("myScore").textContent = "0/0"
+
+    clearInterval(timeInterval)
+    seconds = 0
+    document.getElementById("timer").textContent = "0:00";
+
+    startTimer()
+}
+
+startTimer();
 
 setDefaults()
 
