@@ -150,6 +150,11 @@ const invCosQuestions = [
     new Question("invCos", "-√3/2", 150)
 ]
 
+const domainNormal = document.getElementById("0-360")
+const domainIncrease = document.getElementById("360-720")
+const domainDecrease = document.getElementById("-360-0") 
+
+
 let validQuestions
 let validAnswers
 
@@ -277,6 +282,37 @@ function displayQuestion(question)
 
     else{
         
+        if(domainIncrease.checked && domainDecrease.checked == false && domainNormal.checked == false){
+            angle += 360
+        }
+
+        else if(domainIncrease.checked == false && domainDecrease.checked && domainNormal.checked == false){
+            angle -= 360
+        }
+
+        else if(domainIncrease.checked && domainDecrease.checked && domainNormal.checked == false){
+            if(Math.random() < 0.5)
+                angle += 360
+            else
+                angle -= 360
+        }
+
+        else if(domainIncrease.checked == false && domainDecrease.checked && domainNormal.checked){
+            if(Math.random() < 0.5)
+                angle -= 360
+        }
+
+        else if(domainIncrease.checked && domainDecrease.checked == false && domainNormal.checked){
+            if(Math.random() < 0.5)
+                angle += 360
+        }
+
+        else if(domainIncrease.checked && domainDecrease.checked && domainNormal.checked){
+            if(Math.random() < 0.5)
+                angle += 360
+            if(Math.random() < 0.5)
+                angle -= 360
+        }
 
         if(document.getElementById("degrees").checked == true && document.getElementById("radians").checked == true){
             if(Math.random() < 0.5)
@@ -380,23 +416,42 @@ function buttonAnswerClick(buttonName){
 
 function toRadians(degree){
 
+    let radianMeasurement
+
     if(degree == 0)
-        return "0"
+        radianMeasurement = "0"
 
-    else if(degree % 180 == 0)
-        return (degree/180 + "π").replace(/1/g, "")
-
-    else if(degree % 90 == 0)
-        return (degree/90 + "π/2").replace(/1/g, "")
-
-    else if(degree % 60 == 0)
-        return (degree/60 + "π/3").replace(/1/g, "")
-
-    else if(degree % 45 == 0)
-        return (degree/45 + "π/4").replace(/1/g, "")
-
-    else if(degree % 30 == 0)
-        return (degree/30 + "π/6").replace(/1/g, "")
+    else if(degree % 180 == 0){
+        radianMeasurement = degree/180 + "π" 
+        if (degree/180 == 1){
+            radianMeasurement = radianMeasurement.replace(/1/g, "")
+        }
+    }
+    else if(degree % 90 == 0){
+        radianMeasurement = degree/90 + "π/2"
+        if (degree/90 == 1){
+            radianMeasurement = radianMeasurement.replace(/1/g, "")
+        }
+    }
+    else if(degree % 60 == 0){
+        radianMeasurement = degree/60 + "π/3"
+        if (degree/60 == 1){
+            radianMeasurement = radianMeasurement.replace(/1/g, "")
+        }
+    }
+    else if(degree % 45 == 0){
+        radianMeasurement = degree/45 + "π/4"
+        if (degree/45 == 1){
+            radianMeasurement = radianMeasurement.replace(/1/g, "")
+        }
+    }
+    else if(degree % 30 == 0){
+        radianMeasurement = degree/30 + "π/6"
+        if (degree/30 == 1){
+            radianMeasurement = radianMeasurement.replace(/1/g, "")
+        }
+    }
+    return radianMeasurement
 }
 
 function nextQuestion(){
