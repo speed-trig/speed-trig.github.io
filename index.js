@@ -150,9 +150,48 @@ const invCosQuestions = [
     new Question("invCos", "-√3/2", 150)
 ]
 
+let popup = document.getElementById("settingsPopup");
+let icon = document.getElementById("settingsIcon");
+let span = document.getElementsByClassName("close")[0];
+
+icon.onclick = function() {
+    popup.style.display = "block";
+}
+
+span.onclick = function() {
+    popup.style.display = "none";
+}
+
+window.onclick = function(event) {
+    if (event.target == popup) {
+        popup.style.display = "none";
+    }
+}
+
+let startPractice = document.getElementById("startPractice");
+
+
+
+let exitButton = document.getElementById("exitButton");
+
+
+
 const domainNormal = document.getElementById("0-360")
 const domainIncrease = document.getElementById("360-720")
 const domainDecrease = document.getElementById("-360-0") 
+
+const answerButtons = [
+    document.getElementById("answerButton1"),
+    document.getElementById("answerButton2"),
+    document.getElementById("answerButton3"),
+    document.getElementById("answerButton4"),
+    document.getElementById("answerButton5"),
+    document.getElementById("answerButton6"),
+    document.getElementById("answerButton7"),
+    document.getElementById("answerButton8")
+]
+
+const trigquestion = document.getElementById("question")
 
 
 let validQuestions
@@ -254,8 +293,6 @@ function setButtons(question, answers){
         }
     }
 
-    let answerButtons = document.getElementById("answerButtons").getElementsByTagName("button")
-
     for(let i = 0; i < answerButtons.length; i++){
         answerButtons[i].innerHTML = possibleAnswers[i]
     }
@@ -269,14 +306,14 @@ function displayQuestion(question)
     if (question.trig == "invSin"){
         
         let text = "sin<sup>-1</sup>(" + angle + ")"
-        document.getElementById("question").innerHTML = text
+        trigquestion.innerHTML = text
 
     }
     
     else if (question.trig == "invCos"){
         
         let text = "cos<sup>-1</sup>(" + angle + ")"
-        document.getElementById("question").innerHTML = text
+        trigquestion.innerHTML = text
 
     } 
 
@@ -324,7 +361,7 @@ function displayQuestion(question)
         }
 
         let text = question.trig + "(" + angle + ")"
-        document.getElementById("question").innerHTML = text
+        trigquestion.innerHTML = text
     }
     
 }
@@ -382,7 +419,7 @@ document.getElementById("showScoreboard").onchange = function(){
 }
 
 document.getElementById("selectAll").onclick = function(){
-    const checkboxes = document.querySelectorAll('div#settings input[type="checkbox"]');
+    const checkboxes = document.querySelectorAll('div#settingsPopup input[type="checkbox"]');
     checkboxes.forEach((checkbox) => {checkbox.checked = true;})
 
     updateValidQuestions()
@@ -397,11 +434,11 @@ function buttonAnswerClick(buttonName){
     }
 
     if(buttonAnswer == correctAnswer){
-        document.getElementById("correct").innerHTML = "correct"
+        //document.getElementById("correct").innerHTML = "correct"
         correctAnswerScore += 1;
     }
     else{
-        document.getElementById("correct").innerHTML = "incorrect"
+        //document.getElementById("correct").innerHTML = "incorrect"
     }
 
     totalQuestions += 1;
@@ -455,7 +492,7 @@ function toRadians(degree){
 }
 
 function nextQuestion(){
-    document.getElementById("correct").innerHTML = ""
+   // document.getElementById("correct").innerHTML = ""
     myQuestion = selectQuestion()
     validAnswers = setAnswers(myQuestion)
     setButtons(myQuestion, validAnswers)
@@ -474,12 +511,28 @@ function startTimer() {
     }   , 1000);
 }
 
-document.getElementById("reset").onclick = function(){
+startPractice.onclick = function () {
+
+
+    document.getElementById("homescreen").style.display = "none";
+    document.getElementById("practiceMode").style.display = "flex";
+
+    resetInfo();
+    setDefaults();
+}
+
+exitButton.onclick = function() {
+    document.getElementById("practiceMode").style.display = "none";
+    document.getElementById("homescreen").style.display = "flex";
+
+}
+
+function resetInfo(){
     correctAnswerScore = 0
     totalQuestions = 0
     accuracy = 0
-    document.getElementById("accuracy").innerHTML = accuracy + "%"
-    document.getElementById("myScore").textContent = "0/0"
+    document.getElementById("accuracy").innerHTML = ""
+    document.getElementById("myScore").textContent = ""
 
     clearInterval(timeInterval)
     seconds = 0
@@ -488,7 +541,6 @@ document.getElementById("reset").onclick = function(){
     startTimer()
 }
 
-startTimer();
 
-setDefaults()
+
 

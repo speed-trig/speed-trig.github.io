@@ -1,142 +1,154 @@
-<html lang="en">
+
+<!DOCTYPE html>
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Speed Trig Game</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-    <div id="all">
+<p id="settingsIcon" class="settings-icon">⚙️</p>
+<div id="settingsPopup" class="popup">
+        <div class="popup-content">
+            <span class="close">×</span>
+            <div class="checkbox-group">
+                <div class="checkbox-block">
+                    <div class="checkbox-row">
+                        <label for="sin">sin</label>
+                        <input type="checkbox" id="sin" checked="true" onchange="updateValidQuestions()">    
 
-        <div id="scoreBoard">
-  
-            <p id="timer">00:00</p>
-
-            <p id="myScore">0/0</p>
-
-            <p id="accuracy">0%</p>
-            <button id="reset">Reset</button>
-
-        </div>
-
-
-
-        <div id="questionsAndAnswers">
-            <h1>Speed Trig Practice Game</h1>
-            <p>Play the speed trig game</p>
-
-            <br>
-
-            <h3 id="question"></h3>
-
-            <div id="answerButtons">
-                <table border="1">
-                    <tr>
-                        <td><button id="button0" onclick="buttonAnswerClick(id)"></button></td>
-                        <td><button id="button1" onclick="buttonAnswerClick(id)"></button></td>
-                        <td><button id="button2" onclick="buttonAnswerClick(id)"></button></td>
-                        <td><button id="button3" onclick="buttonAnswerClick(id)"></button></td>
-                    </tr>
-                    <tr>
-                        <td><button id="button4" onclick="buttonAnswerClick(id)"></button></td>
-                        <td><button id="button5" onclick="buttonAnswerClick(id)"></button></td>
-                        <td><button id="button6" onclick="buttonAnswerClick(id)"></button></td>
-                        <td><button id="button7" onclick="buttonAnswerClick(id)"></button></td>
-                    </tr>
-                </table>
+                        <label for="invsin">sin<sup>-1</sup></label>
+                        <input type="checkbox" id="invsin" onchange="updateValidQuestions()">
+                    </div>
+                    <div class="checkbox-row">
+                        <label for="cos">cos</label>
+                        <input type="checkbox" id="cos" checked="true" onchange="updateValidQuestions()">
+            
+                        <label for="invcos">cos<sup>-1</sup></label>
+                        <input type="checkbox" id="invcos" onchange="updateValidQuestions()">
+                    </div>
+                    <div class="checkbox-row">
+                        <label for="tan">tan</label>
+                        <input type="checkbox" id="tan" onchange="updateValidQuestions()">
+            
+                        <label for="invtan">tan<sup>-1</sup></label>
+                        <input type="checkbox" id="invtan" onchange="updateValidQuestions()">
+                    </div>
+                    <div class="checkbox-row">
+                        <label for="cot">cot</label>
+                        <input type="checkbox" id="cot" onchange="updateValidQuestions()">
+            
+                        <label for="invcot">cot<sup>-1</sup></label>
+                        <input type="checkbox" id="invcot" onchange="updateValidQuestions()">
+                    </div>
+                    <div class="checkbox-row">
+                        <label for="sec">sec</label>
+                        <input type="checkbox" id="sec" onchange="updateValidQuestions()">
+            
+                        <label for="invsec">sec<sup>-1</sup></label>
+                        <input type="checkbox" id="invsec" onchange="updateValidQuestions()">
+                    </div>
+                    <div class="checkbox-row">
+                        <label for="csc">csc</label>
+                        <input type="checkbox" id="csc" onchange="updateValidQuestions()">
+            
+                        <label for="invcsc">csc<sup>-1</sup></label>
+                        <input type="checkbox" id="invcsc" onchange="updateValidQuestions()">
+                    </div>
+                </div>
+                <div class="spacer"></div>
+                <div class="checkbox-block">
+                    <div class="checkbox-row">
+                        <label for="degrees">degrees</label>
+                        <input type="checkbox" id="degrees" name="degrees">    
+                    </div>
+                    <div class="checkbox-row">
+                        <label for="radians">radians</label>
+                        <input type="checkbox" id="radians" name="radians">    
+                    </div>
+                </div>
+                <div class="spacer"></div>
+                <div class="checkbox-block">
+                    <div class="checkbox-row">
+                        <label for="0-360">0 - 2π</label>
+                        <input type="checkbox" id="0-360" checked="true">
+                    </div>
+                    <div class="checkbox-row">
+                        <label for="360-720">2π - 4π</label>
+                        <input type="checkbox" id="360-720">
+                    </div>
+                    <div class="checkbox-row">
+                        <label for="-360-0">-2π - 0</label>
+                        <input type="checkbox" id="-360-0">
+                    </div>
+                </div>
+                <div class="spacer"></div>
+                <div class="checkbox-block">
+                    <div class="checkbox-row">
+                        <label for="showTimer">Show timer</label>
+                        <input type="checkbox" id="showTimer" checked="true">
+                    </div>
+                    <div class="checkbox-row">
+                        <label for="showScoreboard">Show score</label>
+                        <input type="checkbox" id="showScoreboard" checked="true">
+                    </div>
+                    <div class="checkbox-row">
+                        <label for="showFeedback">Show correct answer</label>
+                        <input type="checkbox" id="showFeedback" checked="true">
+                    </div>
+                </div>
+                <div class="spacer"></div>
+                <div class="checkbox-block">
+                    <div class="checkbox-row">
+                        <button id="selectAll">Select All</button>
+                    </div>
+                </div>
             </div>
-
-            <h3 id="correct"></h3>
-
-            <button id="continue" onclick="nextQuestion()">Skip Question</button>
-
         </div>
+</div>
 
-        <div id="settings">
+<div id="homescreen">
 
-            <br><br><br>
-            <h4>Settings</h4>
-            
+    <h1>Speed Trig Practice</h1>
 
-            <label for="sin">sin</label>
-            <input type="checkbox" id="sin" checked="true" onchange="updateValidQuestions()">    
+    <button class="button" style="vertical-align:middle" id="startPractice"><span>Practice Mode </span></button>
+    <button class="button" style="vertical-align:middle"><span>Challenge Mode </span></button>
 
-            <label style="margin-left: 40px;" for="invSin">sin<sup>-1</sup></label>
-            <input type="checkbox" id="invSin" onchange="updateValidQuestions()">
+</div>
 
-            <br>
+<div id="practiceMode">
 
-            <label for="cos">cos</label>
-            <input type="checkbox" id="cos" checked="true" onchange="updateValidQuestions()">
 
-            <label style="margin-left: 40px;" for="invCos">cos<sup>-1</sup></label>
-            <input type="checkbox" id="invCos" onchange="updateValidQuestions()">
-            
-            <br>
 
-            <label for="tan">tan</label>
-            <input type="checkbox" id="tan" onchange="updateValidQuestions()">
-            <br>
-
-            <label for="csc">csc</label>
-            <input type="checkbox" id="csc" onchange="updateValidQuestions()">
-            <br>
-
-            <label for="sec">sec</label>
-            <input type="checkbox" id="sec" onchange="updateValidQuestions()">
-            <br>
-
-            <label for="cot">cot</label>
-            <input type="checkbox" id="cot" onchange="updateValidQuestions()">
-
-            <br><br><br><br>
-
-            <label for="degrees">degrees</label>
-            <input type="checkbox" id="degrees" checked="true">
-            <br>
-
-            <label for="radians">radians</label>
-            <input type="checkbox" id="radians" checked="true">
-
-            <br><br><br><br>
-
-            <label for="0-360">0 - 2π</label>
-            <input type="checkbox" id="0-360" checked="true">
-            <br>
-
-            <label for="360-720">2π - 4π</label>
-            <input type="checkbox" id="360-720">
-            <br>
-
-            <label for="-360-0">-2π - 0</label>
-            <input type="checkbox" id="-360-0">
-
-            <br><br><br><br>
-
-            <label for="showTimer">Show timer</label>
-            <input type="checkbox" id="showTimer" checked="true">
-            <br>
-
-            <label for="showScoreboard">Show score</label>
-            <input type="checkbox" id="showScoreboard" checked="true">
-            <br>
-
-            <!--
-            <label for="feedback">Display correct answer</label>
-            <input type="checkbox" id="feedback">
-            -->
-
-            <br><br>
-
-            <button id="selectAll">Select All</button>
-
-            <h3 id="test"></h3>
-        
-        </div>
+    <div class="info-block">
+        <h3 id="timer">0:00</h3>
+        <h3 id="myScore">0/0</h3>
+        <h3 id="accuracy">0%</h3>
+    </div>    
+    
+    <h1 id="question">Question</h1>
+    
+    <div class="button-grid">
+        <button class="button" id="answerButton1" onclick="buttonAnswerClick(id)"><span>Button 1</span></button>
+        <button class="button" id="answerButton2" onclick="buttonAnswerClick(id)"><span>Button 2</span></button>
+        <button class="button" id="answerButton3" onclick="buttonAnswerClick(id)"><span>Button 3</span></button>
+        <button class="button" id="answerButton4" onclick="buttonAnswerClick(id)"><span>Button 4</span></button>
+        <button class="button" id="answerButton5" onclick="buttonAnswerClick(id)"><span>Button 5</span></button>
+        <button class="button" id="answerButton6" onclick="buttonAnswerClick(id)"><span>Button 6</span></button>
+        <button class="button" id="answerButton7" onclick="buttonAnswerClick(id)"><span>Button 7</span></button>
+        <button class="button" id="answerButton8" onclick="buttonAnswerClick(id)"><span>Button 8</span></button>
     </div>
+    
+    <br>
+    
+    <button class="button" id="exitButton">Exit Practice</button>
+</div>
 
-    <script src="index.js"></script>
+<script src="index.js"></script>
 
 </body>
 </html>
+
+
+
+
+
