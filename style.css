@@ -155,3 +155,18 @@
     grid-template-columns: repeat(4, 1fr);
     gap: 20px;
 }
+
+#feedback {
+    font-size: 28px;
+    opacity: 0;
+}
+
+@keyframes fadeOut {
+    0% { opacity: 1; }
+  100% { opacity: 0; }
+}
+
+.animate {
+    animation-name: fadeOut;
+    animation-duration: 2000ms;
+}

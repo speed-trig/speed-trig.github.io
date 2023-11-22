@@ -6,105 +6,7 @@
 </head>
 <body>
 
-<p id="settingsIcon" class="settings-icon">⚙️</p>
-<div id="settingsPopup" class="popup">
-        <div class="popup-content">
-            <span class="close">×</span>
-            <div class="checkbox-group">
-                <div class="checkbox-block">
-                    <div class="checkbox-row">
-                        <label for="sin">sin</label>
-                        <input type="checkbox" id="sin" checked="true" onchange="updateValidQuestions()">    
 
-                        <label for="invsin">sin<sup>-1</sup></label>
-                        <input type="checkbox" id="invsin" onchange="updateValidQuestions()">
-                    </div>
-                    <div class="checkbox-row">
-                        <label for="cos">cos</label>
-                        <input type="checkbox" id="cos" checked="true" onchange="updateValidQuestions()">
-            
-                        <label for="invcos">cos<sup>-1</sup></label>
-                        <input type="checkbox" id="invcos" onchange="updateValidQuestions()">
-                    </div>
-                    <div class="checkbox-row">
-                        <label for="tan">tan</label>
-                        <input type="checkbox" id="tan" onchange="updateValidQuestions()">
-            
-                        <label for="invtan">tan<sup>-1</sup></label>
-                        <input type="checkbox" id="invtan" onchange="updateValidQuestions()">
-                    </div>
-                    <div class="checkbox-row">
-                        <label for="cot">cot</label>
-                        <input type="checkbox" id="cot" onchange="updateValidQuestions()">
-            
-                        <label for="invcot">cot<sup>-1</sup></label>
-                        <input type="checkbox" id="invcot" onchange="updateValidQuestions()">
-                    </div>
-                    <div class="checkbox-row">
-                        <label for="sec">sec</label>
-                        <input type="checkbox" id="sec" onchange="updateValidQuestions()">
-            
-                        <label for="invsec">sec<sup>-1</sup></label>
-                        <input type="checkbox" id="invsec" onchange="updateValidQuestions()">
-                    </div>
-                    <div class="checkbox-row">
-                        <label for="csc">csc</label>
-                        <input type="checkbox" id="csc" onchange="updateValidQuestions()">
-            
-                        <label for="invcsc">csc<sup>-1</sup></label>
-                        <input type="checkbox" id="invcsc" onchange="updateValidQuestions()">
-                    </div>
-                </div>
-                <div class="spacer"></div>
-                <div class="checkbox-block">
-                    <div class="checkbox-row">
-                        <label for="degrees">degrees</label>
-                        <input type="checkbox" id="degrees" name="degrees">    
-                    </div>
-                    <div class="checkbox-row">
-                        <label for="radians">radians</label>
-                        <input type="checkbox" id="radians" name="radians">    
-                    </div>
-                </div>
-                <div class="spacer"></div>
-                <div class="checkbox-block">
-                    <div class="checkbox-row">
-                        <label for="0-360">0 - 2π</label>
-                        <input type="checkbox" id="0-360" checked="true">
-                    </div>
-                    <div class="checkbox-row">
-                        <label for="360-720">2π - 4π</label>
-                        <input type="checkbox" id="360-720">
-                    </div>
-                    <div class="checkbox-row">
-                        <label for="-360-0">-2π - 0</label>
-                        <input type="checkbox" id="-360-0">
-                    </div>
-                </div>
-                <div class="spacer"></div>
-                <div class="checkbox-block">
-                    <div class="checkbox-row">
-                        <label for="showTimer">Show timer</label>
-                        <input type="checkbox" id="showTimer" checked="true">
-                    </div>
-                    <div class="checkbox-row">
-                        <label for="showScoreboard">Show score</label>
-                        <input type="checkbox" id="showScoreboard" checked="true">
-                    </div>
-                    <div class="checkbox-row">
-                        <label for="showFeedback">Show correct answer</label>
-                        <input type="checkbox" id="showFeedback" checked="true">
-                    </div>
-                </div>
-                <div class="spacer"></div>
-                <div class="checkbox-block">
-                    <div class="checkbox-row">
-                        <button id="selectAll">Select All</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-</div>
 
 <div id="homescreen">
 
@@ -117,7 +19,109 @@
 
 <div id="practiceMode">
 
+    <p id="settingsIcon" class="settings-icon">⚙️</p>
+    <div id="settingsPopup" class="popup">
+            <div class="popup-content">
+                <span class="close">×</span>
+                <div class="checkbox-group">
+                    <div class="checkbox-block">
+                        <div class="checkbox-row">
+                            <label for="sin">sin</label>
+                            <input type="checkbox" id="sin" checked="true" onchange="updateValidQuestions()">    
 
+                            <label for="invsin">sin<sup>-1</sup></label>
+                            <input type="checkbox" id="invsin" onchange="updateValidQuestions()">
+                        </div>
+                        <div class="checkbox-row">
+                            <label for="cos">cos</label>
+                            <input type="checkbox" id="cos" checked="true" onchange="updateValidQuestions()">
+                
+                            <label for="invcos">cos<sup>-1</sup></label>
+                            <input type="checkbox" id="invcos" onchange="updateValidQuestions()">
+                        </div>
+                        <div class="checkbox-row">
+                            <label for="tan">tan</label>
+                            <input type="checkbox" id="tan" onchange="updateValidQuestions()">
+                
+                            <label for="invtan">tan<sup>-1</sup></label>
+                            <input type="checkbox" id="invtan" onchange="updateValidQuestions()">
+                        </div>
+                        <div class="checkbox-row">
+                            <label for="cot">cot</label>
+                            <input type="checkbox" id="cot" onchange="updateValidQuestions()">
+                
+                            <label for="invcot">cot<sup>-1</sup></label>
+                            <input type="checkbox" id="invcot" onchange="updateValidQuestions()">
+                        </div>
+                        <div class="checkbox-row">
+                            <label for="sec">sec</label>
+                            <input type="checkbox" id="sec" onchange="updateValidQuestions()">
+                
+                            <label for="invsec">sec<sup>-1</sup></label>
+                            <input type="checkbox" id="invsec" onchange="updateValidQuestions()">
+                        </div>
+                        <div class="checkbox-row">
+                            <label for="csc">csc</label>
+                            <input type="checkbox" id="csc" onchange="updateValidQuestions()">
+                
+                            <label for="invcsc">csc<sup>-1</sup></label>
+                            <input type="checkbox" id="invcsc" onchange="updateValidQuestions()">
+                        </div>
+                    </div>
+                    <div class="spacer"></div>
+                    <div class="checkbox-block">
+                        <div class="checkbox-row">
+                            <label for="degrees">degrees</label>
+                            <input type="checkbox" id="degrees" name="degrees" checked="true">    
+                        </div>
+                        <div class="checkbox-row">
+                            <label for="radians">radians</label>
+                            <input type="checkbox" id="radians" name="radians" checked="true">    
+                        </div>
+                    </div>
+                    <div class="spacer"></div>
+                    <div class="checkbox-block">
+                        <div class="checkbox-row">
+                            <label for="0-360">0 - 2π</label>
+                            <input type="checkbox" id="0-360" checked="true">
+                        </div>
+                        <div class="checkbox-row">
+                            <label for="360-720">2π - 4π</label>
+                            <input type="checkbox" id="360-720">
+                        </div>
+                        <div class="checkbox-row">
+                            <label for="-360-0">-2π - 0</label>
+                            <input type="checkbox" id="-360-0">
+                        </div>
+                    </div>
+                    <div class="spacer"></div>
+                    <div class="checkbox-block">
+                        <div class="checkbox-row">
+                            <label for="showTimer">Show timer</label>
+                            <input type="checkbox" id="showTimer" checked="true">
+                        </div>
+                        <div class="checkbox-row">
+                            <label for="showQuestionNumber">Show question number</label>
+                            <input type="checkbox" id="showQuestionNumber" checked="true">
+                        </div>
+                        <div class="checkbox-row">
+                            <label for="showAccuracy">Show percent accuracy</label>
+                            <input type="checkbox" id="showAccuracy" checked="true">
+                        </div>
+                        <div class="checkbox-row">
+                            <label for="showFeedback">Show correct answer</label>
+                            <input type="checkbox" id="showFeedback">
+                        </div>
+                    </div>
+                    <div class="spacer"></div>
+                    <div class="checkbox-block">
+                        <div class="checkbox-row">
+                            <button id="selectAll">Select All</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    </div>
 
     <div class="info-block">
         <h3 id="timer">0:00</h3>
@@ -139,6 +143,8 @@
     </div>
     
     <br>
+
+    <h3 id="feedback">Correct</h3>
     
     <button class="button" id="exitButton">Exit Practice</button>
 </div>

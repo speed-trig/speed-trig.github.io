@@ -168,13 +168,11 @@ window.onclick = function(event) {
     }
 }
 
-let startPractice = document.getElementById("startPractice");
+const startPractice = document.getElementById("startPractice");
 
+const exitButton = document.getElementById("exitButton");
 
-
-let exitButton = document.getElementById("exitButton");
-
-
+const feedback = document.getElementById("feedback");
 
 const domainNormal = document.getElementById("0-360")
 const domainIncrease = document.getElementById("360-720")
@@ -199,14 +197,14 @@ let validAnswers
 
 let correctAnswerScore = 0;
 let totalQuestions = 0;
+let totalAnswers = 0;
 let accuracy = 0;
 
 let seconds = 0;
 let timeInterval
 
 function setDefaults(){
-    validQuestions = sinQuestions
-    validQuestions = validQuestions.concat(cosQuestions)
+    validQuestions = sinQuestions.concat(cosQuestions)
     myQuestion = selectQuestion()
     validAnswers = setAnswers(myQuestion)
     setButtons(myQuestion, validAnswers)
@@ -388,10 +386,10 @@ function updateValidQuestions(){
     if(document.getElementById("csc").checked){
         validQuestions = validQuestions.concat(cscQuestions)
     }
-    if(document.getElementById("invSin").checked){
+    if(document.getElementById("invsin").checked){
         validQuestions = validQuestions.concat(invSinQuestions)
     }
-    if(document.getElementById("invCos").checked){
+    if(document.getElementById("invcos").checked){
         validQuestions = validQuestions.concat(invCosQuestions)
     }
 }
@@ -406,15 +404,23 @@ document.getElementById("showTimer").onchange = function(){
     }
 }
 
-document.getElementById("showScoreboard").onchange = function(){
+document.getElementById("showAccuracy").onchange = function(){
 
-    if(document.getElementById("showScoreboard").checked){
-        document.getElementById("myScore").style.visibility = "visible"
+    if(document.getElementById("showAccuracy").checked){
         document.getElementById("accuracy").style.visibility = "visible"
     }
     else{
-        document.getElementById("myScore").style.visibility = "hidden"
         document.getElementById("accuracy").style.visibility = "hidden"
+    }
+}
+
+document.getElementById("showQuestionNumber").onchange = function(){
+
+    if(document.getElementById("showQuestionNumber").checked){
+        document.getElementById("myScore").style.visibility = "visible"
+    }
+    else{
+        document.getElementById("myScore").style.visibility = "hidden"
     }
 }
 
@@ -434,21 +440,45 @@ function buttonAnswerClick(buttonName){
     }
 
     if(buttonAnswer == correctAnswer){
-        //document.getElementById("correct").innerHTML = "correct"
+
         correctAnswerScore += 1;
+
+        feedback.textContent = "Correct"
+        feedback.classList.remove("animate")
+        void feedback.offsetWidth
+        feedback.style.opacity = 1;
+        feedback.style.color = "green"
+        feedback.classList.add("animate")
+        feedback.style.opacity= 0;
+
+        totalQuestions += 1;
+
+        nextQuestion();
     }
     else{
-        //document.getElementById("correct").innerHTML = "incorrect"
+
+        if(document.getElementById("showFeedback").checked){
+            feedback.textContent = "Correct answer: " + correctAnswer;
+        }
+        else{
+            feedback.textContent = "Incorrect";
+        }
+
+        feedback.classList.remove("animate")
+        void feedback.offsetWidth
+        feedback.style.opacity = 1;
+        feedback.style.color = "red"
+        feedback.classList.add("animate")
+        feedback.style.opacity = 0; 
     }
 
-    totalQuestions += 1;
-    accuracy = 100 * correctAnswerScore/totalQuestions;
+    totalAnswers += 1;
+    accuracy = (100 * correctAnswerScore/totalAnswers).toFixed(0);
 
-    document.getElementById("myScore").innerHTML = correctAnswerScore + "/" + totalQuestions
+    document.getElementById("myScore").innerHTML = "#" + (totalQuestions + 1)
     document.getElementById("accuracy").innerHTML = accuracy + "%"
 
-    nextQuestion();
-
+    
 }
 
 function toRadians(degree){
@@ -460,31 +490,31 @@ function toRadians(degree){
 
     else if(degree % 180 == 0){
         radianMeasurement = degree/180 + "π" 
-        if (degree/180 == 1){
+        if (degree/180 == 1 || degree/180 == -1){
             radianMeasurement = radianMeasurement.replace(/1/g, "")
         }
     }
     else if(degree % 90 == 0){
         radianMeasurement = degree/90 + "π/2"
-        if (degree/90 == 1){
+        if (degree/90 == 1 || degree/90 == -1){
             radianMeasurement = radianMeasurement.replace(/1/g, "")
         }
     }
     else if(degree % 60 == 0){
         radianMeasurement = degree/60 + "π/3"
-        if (degree/60 == 1){
+        if (degree/60 == 1 || degree/60 == -1){
             radianMeasurement = radianMeasurement.replace(/1/g, "")
         }
     }
     else if(degree % 45 == 0){
         radianMeasurement = degree/45 + "π/4"
-        if (degree/45 == 1){
+        if (degree/45 == 1 || degree/45 == -1){
             radianMeasurement = radianMeasurement.replace(/1/g, "")
         }
     }
     else if(degree % 30 == 0){
         radianMeasurement = degree/30 + "π/6"
-        if (degree/30 == 1){
+        if (degree/30 == 1 || degree/30 == -1){
             radianMeasurement = radianMeasurement.replace(/1/g, "")
         }
     }
@@ -517,8 +547,11 @@ startPractice.onclick = function () {
     document.getElementById("homescreen").style.display = "none";
     document.getElementById("practiceMode").style.display = "flex";
 
+    feedback.textContent = ""
+
     resetInfo();
     setDefaults();
+    updateValidQuestions();
 }
 
 exitButton.onclick = function() {
@@ -530,9 +563,10 @@ exitButton.onclick = function() {
 function resetInfo(){
     correctAnswerScore = 0
     totalQuestions = 0
+    totalAnswers = 0;
     accuracy = 0
     document.getElementById("accuracy").innerHTML = ""
-    document.getElementById("myScore").textContent = ""
+    document.getElementById("myScore").textContent = "#1" 
 
     clearInterval(timeInterval)
     seconds = 0
