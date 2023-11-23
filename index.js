@@ -169,6 +169,12 @@ window.onclick = function(event) {
 }
 
 const startPractice = document.getElementById("startPractice");
+const startChallenge = document.getElementById("startChallenge");
+
+const easy = document.getElementById("easy");
+const normal = document.getElementById("normal");
+const hard = document.getElementById("hard");
+
 
 const exitButton = document.getElementById("exitButton");
 
@@ -177,6 +183,15 @@ const feedback = document.getElementById("feedback");
 const domainNormal = document.getElementById("0-360")
 const domainIncrease = document.getElementById("360-720")
 const domainDecrease = document.getElementById("-360-0") 
+
+const degreeCheck = document.getElementById("degrees")
+const radianCheck = document.getElementById("radians")
+
+const scoreCheck = document.getElementById("showQuestionNumber")
+const timerCheck = document.getElementById("showTimer")
+const feedbackCheck = document.getElementById("showFeedback")
+const accuracyCheck = document.getElementById("showAccuracy")
+
 
 const answerButtons = [
     document.getElementById("answerButton1"),
@@ -191,6 +206,7 @@ const answerButtons = [
 
 const trigquestion = document.getElementById("question")
 
+let mode;
 
 let validQuestions
 let validAnswers
@@ -272,8 +288,6 @@ function setButtons(question, answers){
         const j = Math.floor(Math.random() * (i + 1));
         [possibleAnswers[i], possibleAnswers[j]] = [possibleAnswers[j], possibleAnswers[i]];
     }
-
-    //possibleAnswers.sort()
 
     if (question.trig == "invSin" || question.trig == "invCos"){
 
@@ -460,8 +474,20 @@ function buttonAnswerClick(buttonName){
         if(document.getElementById("showFeedback").checked){
             feedback.textContent = "Correct answer: " + correctAnswer;
         }
+        else if (mode == "challenge"){
+            feedback.textContent = "-5 Seconds";
+            seconds -= 5;
+            minutes = Math.floor(seconds / 60);
+            remainderSeconds = seconds % 60;
+            display = `${minutes}:${remainderSeconds < 10 ? '0' : ''}${remainderSeconds}`;
+            document.getElementById("timer").textContent = display;
+
+            if(seconds <= 0){
+                endChallenge();
+            }
+        }
         else{
-            feedback.textContent = "Incorrect";
+            feedback.textContent = "Incorrect"
         }
 
         feedback.classList.remove("animate")
@@ -475,9 +501,14 @@ function buttonAnswerClick(buttonName){
     totalAnswers += 1;
     accuracy = (100 * correctAnswerScore/totalAnswers).toFixed(0);
 
-    document.getElementById("myScore").innerHTML = "#" + (totalQuestions + 1)
-    document.getElementById("accuracy").innerHTML = accuracy + "%"
+    if(mode == "practice"){
+        document.getElementById("myScore").innerHTML = "#" + (totalQuestions + 1)
+        document.getElementById("accuracy").innerHTML = accuracy + "%"
+    }
 
+    else if(mode == "challenge"){
+        document.getElementById("myScore").innerHTML = "Score: " + (correctAnswerScore)
+    }
     
 }
 
@@ -541,38 +572,176 @@ function startTimer() {
     }   , 1000);
 }
 
+function startTimerChallenge() {
+
+    timeInterval = setInterval(() => {
+        seconds--;
+
+        if(seconds <= 0){
+            endChallenge();
+        }
+
+        minutes = Math.floor(seconds / 60);
+        remainderSeconds = seconds % 60;
+        display = `${minutes}:${remainderSeconds < 10 ? '0' : ''}${remainderSeconds}`;
+        document.getElementById("timer").textContent = display;
+    }   , 1000);
+}
+
 startPractice.onclick = function () {
 
-
-    document.getElementById("homescreen").style.display = "none";
-    document.getElementById("practiceMode").style.display = "flex";
-
-    feedback.textContent = ""
+    mode = "practice"
+    updateDisplay()
+    
 
     resetInfo();
     setDefaults();
     updateValidQuestions();
 }
 
+startChallenge.onclick = function() {
+
+    document.getElementById("homescreen").style.display = "none";
+    document.getElementById("challengeSelect").style.display = "flex";
+}
+
+easy.onclick = function() {
+
+    mode = "challenge"
+
+    updateDisplay()
+
+    degreeCheck.checked = true
+    radianCheck.checked = true
+    domainNormal.checked = true
+    domainIncrease.checked = false
+    domainDecrease.checked = false
+
+    validQuestions = (sinQuestions.slice(0, 5)).concat(cosQuestions.slice(0, 5))
+    myQuestion = selectQuestion()
+    validAnswers = setAnswers(myQuestion)
+    setButtons(myQuestion, validAnswers)
+    displayQuestion(myQuestion)
+
+    resetInfo()
+}
+
+normal.onclick = function() {
+
+    mode = "challenge"
+
+    updateDisplay()
+
+    degreeCheck.checked = true
+    radianCheck.checked = true
+    domainNormal.checked = true
+    domainIncrease.checked = false
+    domainDecrease.checked = false
+
+    validQuestions = sinQuestions.concat(cosQuestions).concat(tanQuestions)
+    myQuestion = selectQuestion()
+    validAnswers = setAnswers(myQuestion)
+    setButtons(myQuestion, validAnswers)
+    displayQuestion(myQuestion)
+
+    resetInfo()
+}
+
+hard.onclick = function() {
+
+    mode = "challenge"
+
+    updateDisplay()
+
+    degreeCheck.checked = true
+    radianCheck.checked = true
+    domainNormal.checked = true
+    domainIncrease.checked = true
+    domainDecrease.checked = true
+
+    validQuestions = sinQuestions.concat(cosQuestions).concat(tanQuestions).concat(cotQuestions).concat(secQuestions).concat(cscQuestions).concat(invCosQuestions).concat(invSinQuestions)
+    myQuestion = selectQuestion()
+    validAnswers = setAnswers(myQuestion)
+    setButtons(myQuestion, validAnswers)
+    displayQuestion(myQuestion)
+
+    resetInfo()
+}
+
 exitButton.onclick = function() {
     document.getElementById("practiceMode").style.display = "none";
     document.getElementById("homescreen").style.display = "flex";
 
+    clearInterval(timeInterval)
 }
 
 function resetInfo(){
-    correctAnswerScore = 0
-    totalQuestions = 0
-    totalAnswers = 0;
-    accuracy = 0
-    document.getElementById("accuracy").innerHTML = ""
-    document.getElementById("myScore").textContent = "#1" 
+
+    if(mode == "practice"){
+        correctAnswerScore = 0
+        totalQuestions = 0
+        totalAnswers = 0;
+        accuracy = 0
+        document.getElementById("accuracy").innerHTML = ""
+        document.getElementById("myScore").textContent = "#1" 
+
+        clearInterval(timeInterval)
+        seconds = 0
+        document.getElementById("timer").textContent = "0:00";
+
+        startTimer()
+    }
+
+    else if (mode == "challenge"){
+        correctAnswerScore = 0
+        totalQuestions = 0
+        totalAnswers = 0;
+        accuracy = 0
+
+        document.getElementById("myScore").textContent = "Score: 0" 
+
+        clearInterval(timeInterval)
+        seconds = 60
+        document.getElementById("timer").textContent = "1:00";
+
+        startTimerChallenge()
+
+    }
+    
+}
+
+function updateDisplay(){
+    
+    if(mode == "practice"){
+        document.getElementById("homescreen").style.display = "none";
+        document.getElementById("practiceMode").style.display = "flex";
+        document.getElementById("settingsIcon").style.display = "flex";
+        document.getElementById("accuracy").style.display = "flex"
+        accuracyCheck.checked = true;
+
+        exitButton.textContent = "Exit Practice"
+        feedback.textContent = ""
+    }
+    else if(mode == "challenge"){
+        document.getElementById("challengeSelect").style.display = "none";
+        document.getElementById("practiceMode").style.display = "flex";
+        document.getElementById("settingsIcon").style.display = "none";
+        document.getElementById("accuracy").style.display = "none"
+
+        scoreCheck.checked = true;
+        timerCheck.checked = true;
+        feedbackCheck.checked = false;
+        exitButton.textContent = "Quit Challenge"
+        feedback.style.color = "green"
+        feedback.textContent = "Begin"
+    }
+}
+
+function endChallenge(){
 
     clearInterval(timeInterval)
-    seconds = 0
-    document.getElementById("timer").textContent = "0:00";
-
-    startTimer()
+    document.getElementById("practiceMode").style.display = "none"
+    document.getElementById("homescreen").style.display = "flex"
 }
 
 

@@ -4,152 +4,172 @@
 <head>
     <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
 
+    <div id="homescreen">
 
+        <h1>Speed Trig Practice</h1>
 
-<div id="homescreen">
+        <button class="button" style="vertical-align:middle" id="startPractice"><span>Practice Mode </span></button>
+        <button class="button" style="vertical-align:middle" id="startChallenge"><span>Challenge Mode </span></button>
 
-    <h1>Speed Trig Practice</h1>
+    </div>
 
-    <button class="button" style="vertical-align:middle" id="startPractice"><span>Practice Mode </span></button>
-    <button class="button" style="vertical-align:middle"><span>Challenge Mode </span></button>
+    <div id="practiceMode">
 
-</div>
+        <p id="settingsIcon" class="settings-icon">⚙️</p>
+        <div id="settingsPopup" class="popup">
+                <div class="popup-content">
+                    <span class="close">×</span>
+                    <div class="checkbox-group">
+                        <div class="checkbox-block">
+                            <div class="checkbox-row">
+                                <label for="sin">sin</label>
+                                <input type="checkbox" id="sin" checked="true" onchange="updateValidQuestions()">    
 
-<div id="practiceMode">
-
-    <p id="settingsIcon" class="settings-icon">⚙️</p>
-    <div id="settingsPopup" class="popup">
-            <div class="popup-content">
-                <span class="close">×</span>
-                <div class="checkbox-group">
-                    <div class="checkbox-block">
-                        <div class="checkbox-row">
-                            <label for="sin">sin</label>
-                            <input type="checkbox" id="sin" checked="true" onchange="updateValidQuestions()">    
-
-                            <label for="invsin">sin<sup>-1</sup></label>
-                            <input type="checkbox" id="invsin" onchange="updateValidQuestions()">
+                                <label for="invsin">sin<sup>-1</sup></label>
+                                <input type="checkbox" id="invsin" onchange="updateValidQuestions()">
+                            </div>
+                            <div class="checkbox-row">
+                                <label for="cos">cos</label>
+                                <input type="checkbox" id="cos" checked="true" onchange="updateValidQuestions()">
+                    
+                                <label for="invcos">cos<sup>-1</sup></label>
+                                <input type="checkbox" id="invcos" onchange="updateValidQuestions()">
+                            </div>
+                            <div class="checkbox-row">
+                                <label for="tan">tan</label>
+                                <input type="checkbox" id="tan" onchange="updateValidQuestions()">
+                    
+                                <label for="invtan">tan<sup>-1</sup></label>
+                                <input type="checkbox" id="invtan" onchange="updateValidQuestions()">
+                            </div>
+                            <div class="checkbox-row">
+                                <label for="cot">cot</label>
+                                <input type="checkbox" id="cot" onchange="updateValidQuestions()">
+                    
+                                <label for="invcot">cot<sup>-1</sup></label>
+                                <input type="checkbox" id="invcot" onchange="updateValidQuestions()">
+                            </div>
+                            <div class="checkbox-row">
+                                <label for="sec">sec</label>
+                                <input type="checkbox" id="sec" onchange="updateValidQuestions()">
+                    
+                                <label for="invsec">sec<sup>-1</sup></label>
+                                <input type="checkbox" id="invsec" onchange="updateValidQuestions()">
+                            </div>
+                            <div class="checkbox-row">
+                                <label for="csc">csc</label>
+                                <input type="checkbox" id="csc" onchange="updateValidQuestions()">
+                    
+                                <label for="invcsc">csc<sup>-1</sup></label>
+                                <input type="checkbox" id="invcsc" onchange="updateValidQuestions()">
+                            </div>
                         </div>
-                        <div class="checkbox-row">
-                            <label for="cos">cos</label>
-                            <input type="checkbox" id="cos" checked="true" onchange="updateValidQuestions()">
-                
-                            <label for="invcos">cos<sup>-1</sup></label>
-                            <input type="checkbox" id="invcos" onchange="updateValidQuestions()">
+                        <div class="spacer"></div>
+                        <div class="checkbox-block">
+                            <div class="checkbox-row">
+                                <label for="degrees">degrees</label>
+                                <input type="checkbox" id="degrees" name="degrees" checked="true">    
+                            </div>
+                            <div class="checkbox-row">
+                                <label for="radians">radians</label>
+                                <input type="checkbox" id="radians" name="radians" checked="true">    
+                            </div>
                         </div>
-                        <div class="checkbox-row">
-                            <label for="tan">tan</label>
-                            <input type="checkbox" id="tan" onchange="updateValidQuestions()">
-                
-                            <label for="invtan">tan<sup>-1</sup></label>
-                            <input type="checkbox" id="invtan" onchange="updateValidQuestions()">
+                        <div class="spacer"></div>
+                        <div class="checkbox-block">
+                            <div class="checkbox-row">
+                                <label for="0-360">0 - 2π</label>
+                                <input type="checkbox" id="0-360" checked="true">
+                            </div>
+                            <div class="checkbox-row">
+                                <label for="360-720">2π - 4π</label>
+                                <input type="checkbox" id="360-720">
+                            </div>
+                            <div class="checkbox-row">
+                                <label for="-360-0">-2π - 0</label>
+                                <input type="checkbox" id="-360-0">
+                            </div>
                         </div>
-                        <div class="checkbox-row">
-                            <label for="cot">cot</label>
-                            <input type="checkbox" id="cot" onchange="updateValidQuestions()">
-                
-                            <label for="invcot">cot<sup>-1</sup></label>
-                            <input type="checkbox" id="invcot" onchange="updateValidQuestions()">
+                        <div class="spacer"></div>
+                        <div class="checkbox-block">
+                            <div class="checkbox-row">
+                                <label for="showTimer">Show timer</label>
+                                <input type="checkbox" id="showTimer" checked="true">
+                            </div>
+                            <div class="checkbox-row">
+                                <label for="showQuestionNumber">Show question number</label>
+                                <input type="checkbox" id="showQuestionNumber" checked="true">
+                            </div>
+                            <div class="checkbox-row">
+                                <label for="showAccuracy">Show percent accuracy</label>
+                                <input type="checkbox" id="showAccuracy" checked="true">
+                            </div>
+                            <div class="checkbox-row">
+                                <label for="showFeedback">Show correct answer</label>
+                                <input type="checkbox" id="showFeedback">
+                            </div>
                         </div>
-                        <div class="checkbox-row">
-                            <label for="sec">sec</label>
-                            <input type="checkbox" id="sec" onchange="updateValidQuestions()">
-                
-                            <label for="invsec">sec<sup>-1</sup></label>
-                            <input type="checkbox" id="invsec" onchange="updateValidQuestions()">
-                        </div>
-                        <div class="checkbox-row">
-                            <label for="csc">csc</label>
-                            <input type="checkbox" id="csc" onchange="updateValidQuestions()">
-                
-                            <label for="invcsc">csc<sup>-1</sup></label>
-                            <input type="checkbox" id="invcsc" onchange="updateValidQuestions()">
-                        </div>
-                    </div>
-                    <div class="spacer"></div>
-                    <div class="checkbox-block">
-                        <div class="checkbox-row">
-                            <label for="degrees">degrees</label>
-                            <input type="checkbox" id="degrees" name="degrees" checked="true">    
-                        </div>
-                        <div class="checkbox-row">
-                            <label for="radians">radians</label>
-                            <input type="checkbox" id="radians" name="radians" checked="true">    
-                        </div>
-                    </div>
-                    <div class="spacer"></div>
-                    <div class="checkbox-block">
-                        <div class="checkbox-row">
-                            <label for="0-360">0 - 2π</label>
-                            <input type="checkbox" id="0-360" checked="true">
-                        </div>
-                        <div class="checkbox-row">
-                            <label for="360-720">2π - 4π</label>
-                            <input type="checkbox" id="360-720">
-                        </div>
-                        <div class="checkbox-row">
-                            <label for="-360-0">-2π - 0</label>
-                            <input type="checkbox" id="-360-0">
-                        </div>
-                    </div>
-                    <div class="spacer"></div>
-                    <div class="checkbox-block">
-                        <div class="checkbox-row">
-                            <label for="showTimer">Show timer</label>
-                            <input type="checkbox" id="showTimer" checked="true">
-                        </div>
-                        <div class="checkbox-row">
-                            <label for="showQuestionNumber">Show question number</label>
-                            <input type="checkbox" id="showQuestionNumber" checked="true">
-                        </div>
-                        <div class="checkbox-row">
-                            <label for="showAccuracy">Show percent accuracy</label>
-                            <input type="checkbox" id="showAccuracy" checked="true">
-                        </div>
-                        <div class="checkbox-row">
-                            <label for="showFeedback">Show correct answer</label>
-                            <input type="checkbox" id="showFeedback">
-                        </div>
-                    </div>
-                    <div class="spacer"></div>
-                    <div class="checkbox-block">
-                        <div class="checkbox-row">
-                            <button id="selectAll">Select All</button>
+                        <div class="spacer"></div>
+                        <div class="checkbox-block">
+                            <div class="checkbox-row">
+                                <button id="selectAll">Select All</button>
+                            </div>
                         </div>
                     </div>
                 </div>
+        </div>
+
+        <div class="info-block">
+            <h3 id="timer">0:00</h3>
+            <h3 id="myScore">0/0</h3>
+            <h3 id="accuracy">0%</h3>
+        </div>    
+        
+        <h1 id="question">Question</h1>
+        
+        <div class="button-grid">
+            <button class="button" id="answerButton1" onclick="buttonAnswerClick(id)"><span>Button 1</span></button>
+            <button class="button" id="answerButton2" onclick="buttonAnswerClick(id)"><span>Button 2</span></button>
+            <button class="button" id="answerButton3" onclick="buttonAnswerClick(id)"><span>Button 3</span></button>
+            <button class="button" id="answerButton4" onclick="buttonAnswerClick(id)"><span>Button 4</span></button>
+            <button class="button" id="answerButton5" onclick="buttonAnswerClick(id)"><span>Button 5</span></button>
+            <button class="button" id="answerButton6" onclick="buttonAnswerClick(id)"><span>Button 6</span></button>
+            <button class="button" id="answerButton7" onclick="buttonAnswerClick(id)"><span>Button 7</span></button>
+            <button class="button" id="answerButton8" onclick="buttonAnswerClick(id)"><span>Button 8</span></button>
+        </div>
+        
+        <br>
+
+        <h3 id="feedback">Correct</h3>
+        
+        <button class="button" id="exitButton">Exit Practice</button>
+    </div>
+
+    <div id="challengeSelect">
+        <div class="center">
+            <h1>Challenge Mode</h1>
+            <p>Try to answer as many questions in one minute!</p>
+            <div class="button-row">
+                <div class="button-block">
+                    <button class="button" id="easy"><span>Easy</span></button>
+                    <h3>High score: 0</h3>
+                </div>
+                <div class="button-block">
+                    <button class="button" id="normal"><span>Normal</span></button>
+                    <h3>High score: 0</h3>
+                </div>
+                <div class="button-block">
+                    <button class="button" id="hard"><span>Hard</span></button>
+                    <h3>High score: 0</h3>
+                </div>
             </div>
+        </div>
     </div>
 
-    <div class="info-block">
-        <h3 id="timer">0:00</h3>
-        <h3 id="myScore">0/0</h3>
-        <h3 id="accuracy">0%</h3>
-    </div>    
-    
-    <h1 id="question">Question</h1>
-    
-    <div class="button-grid">
-        <button class="button" id="answerButton1" onclick="buttonAnswerClick(id)"><span>Button 1</span></button>
-        <button class="button" id="answerButton2" onclick="buttonAnswerClick(id)"><span>Button 2</span></button>
-        <button class="button" id="answerButton3" onclick="buttonAnswerClick(id)"><span>Button 3</span></button>
-        <button class="button" id="answerButton4" onclick="buttonAnswerClick(id)"><span>Button 4</span></button>
-        <button class="button" id="answerButton5" onclick="buttonAnswerClick(id)"><span>Button 5</span></button>
-        <button class="button" id="answerButton6" onclick="buttonAnswerClick(id)"><span>Button 6</span></button>
-        <button class="button" id="answerButton7" onclick="buttonAnswerClick(id)"><span>Button 7</span></button>
-        <button class="button" id="answerButton8" onclick="buttonAnswerClick(id)"><span>Button 8</span></button>
-    </div>
-    
-    <br>
-
-    <h3 id="feedback">Correct</h3>
-    
-    <button class="button" id="exitButton">Exit Practice</button>
-</div>
-
-<script src="index.js"></script>
+    <script src="index.js"></script>
 
 </body>
 </html>
