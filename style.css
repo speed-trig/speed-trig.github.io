@@ -5,7 +5,7 @@
     justify-content: center;
     height: 100vh;
     margin: 0;
-    background-color: #f0f0f0;
+    background-color: #ffffff;
     font-family: Arial, sans-serif;
 }
 
@@ -18,9 +18,9 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    height: 100vh;
+    height: 95vh;
     margin: 0;
-    background-color: #f0f0f0;
+    background-color: #ffffff;
     font-family: Arial, sans-serif;
 }
 
@@ -35,7 +35,18 @@
     justify-content: center;
     height: 100vh;
     margin: 0;
-    background-color: #f0f0f0;
+    background-color: #ffffff;
+    font-family: Arial, sans-serif;
+}
+
+#challengeEnd {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    margin: 0;
+    background-color: #ffffff;
     font-family: Arial, sans-serif;
 }
 
@@ -141,7 +152,7 @@
 }
 
 #feedback {
-    font-size: 28px;
+    font-size: 24px;
     opacity: 0;
 }
 
@@ -173,6 +184,10 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+}
+
+#challengeEnd {
+    display :none;
 }
 
 

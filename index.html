@@ -154,17 +154,29 @@
             <p>Try to answer as many questions in one minute!</p>
             <div class="button-row">
                 <div class="button-block">
-                    <button class="button" id="easy"><span>Easy</span></button>
-                    <h3>High score: 0</h3>
+                    <button class="button" id="easy" onclick="startEasy()"><span>Easy</span></button>
+                    <h2 id="easyHighscoreLabel">High score: 0</h2>
                 </div>
                 <div class="button-block">
-                    <button class="button" id="normal"><span>Normal</span></button>
-                    <h3>High score: 0</h3>
+                    <button class="button" id="normal" onclick="startNormal()"><span>Normal</span></button>
+                    <h2 id="normalHighscoreLabel">High score: 0</h2>
                 </div>
                 <div class="button-block">
-                    <button class="button" id="hard"><span>Hard</span></button>
-                    <h3>High score: 0</h3>
+                    <button class="button" id="hard" onclick="startHard()"><span>Hard</span></button>
+                    <h2 id="hardHighscoreLabel">High score: 0</h2>
                 </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="challengeEnd">
+        <div class="center">
+            <h1>Challenge Complete!</h1>
+            <h2 id="endScore">Score: 0</h2>
+            <h2 id="endHighscore">Highscore: 0</h2>
+            <div class="button-row">
+                <button class="button" id="playAgain"><span>Play Again</span></button>
+                <button class="button" id="returnHome"><span>Exit</span></button>
             </div>
         </div>
     </div>

@@ -175,7 +175,6 @@ const easy = document.getElementById("easy");
 const normal = document.getElementById("normal");
 const hard = document.getElementById("hard");
 
-
 const exitButton = document.getElementById("exitButton");
 
 const feedback = document.getElementById("feedback");
@@ -192,6 +191,7 @@ const timerCheck = document.getElementById("showTimer")
 const feedbackCheck = document.getElementById("showFeedback")
 const accuracyCheck = document.getElementById("showAccuracy")
 
+const endHighscore = document.getElementById("endHighscore")
 
 const answerButtons = [
     document.getElementById("answerButton1"),
@@ -207,6 +207,7 @@ const answerButtons = [
 const trigquestion = document.getElementById("question")
 
 let mode;
+let difficulty;
 
 let validQuestions
 let validAnswers
@@ -218,6 +219,20 @@ let accuracy = 0;
 
 let seconds = 0;
 let timeInterval
+
+let easyHighscore = getCookies("easyHighscore");
+let normalHighscore = getCookies("normalHighscore");
+let hardHighscore = getCookies("hardHighscore");
+
+if(isNaN(easyHighscore)){
+    easyHighscore = 0;
+}
+if(isNaN(normalHighscore)){
+    normalHighscore = 0;
+}
+if(isNaN(hardHighscore)){
+    hardHighscore = 0;
+}
 
 function setDefaults(){
     validQuestions = sinQuestions.concat(cosQuestions)
@@ -603,11 +618,16 @@ startChallenge.onclick = function() {
 
     document.getElementById("homescreen").style.display = "none";
     document.getElementById("challengeSelect").style.display = "flex";
+
+    document.getElementById("easyHighscoreLabel").textContent = "High score: " + easyHighscore
+    document.getElementById("normalHighscoreLabel").textContent = "High score: " + normalHighscore
+    document.getElementById("hardHighscoreLabel").textContent = "High score: " + hardHighscore
 }
 
-easy.onclick = function() {
+function startEasy() {
 
     mode = "challenge"
+    difficulty = "easy"
 
     updateDisplay()
 
@@ -626,9 +646,10 @@ easy.onclick = function() {
     resetInfo()
 }
 
-normal.onclick = function() {
+function startNormal() {
 
     mode = "challenge"
+    difficulty = "normal"
 
     updateDisplay()
 
@@ -647,9 +668,10 @@ normal.onclick = function() {
     resetInfo()
 }
 
-hard.onclick = function() {
+function startHard() {
 
     mode = "challenge"
+    difficulty = "hard"
 
     updateDisplay()
 
@@ -720,10 +742,12 @@ function updateDisplay(){
         accuracyCheck.checked = true;
 
         exitButton.textContent = "Exit Practice"
-        feedback.textContent = ""
+        feedback.style.color = "#ffffff"
+        feedback.textContent = "start"
     }
     else if(mode == "challenge"){
         document.getElementById("challengeSelect").style.display = "none";
+        document.getElementById("challengeEnd").style.display = "none";
         document.getElementById("practiceMode").style.display = "flex";
         document.getElementById("settingsIcon").style.display = "none";
         document.getElementById("accuracy").style.display = "none"
@@ -741,9 +765,79 @@ function endChallenge(){
 
     clearInterval(timeInterval)
     document.getElementById("practiceMode").style.display = "none"
-    document.getElementById("homescreen").style.display = "flex"
+    document.getElementById("challengeEnd").style.display = "flex"
+
+    document.getElementById("endScore").textContent = "Score: " + correctAnswerScore
+    console.log(difficulty)
+    switch(difficulty){
+        
+        case "easy":
+            if(correctAnswerScore > easyHighscore){
+                easyHighscore = correctAnswerScore;
+                document.cookie = "easyHighscore=" + easyHighscore + ";"
+            }
+            endHighscore.textContent = "High score: " + easyHighscore
+            break
+        case "normal":
+            if(correctAnswerScore > normalHighscore){
+                normalHighscore = correctAnswerScore;
+                document.cookie = "normalHighscore=" + normalHighscore + ";"
+             }
+            endHighscore.textContent = "High score: " + normalHighscore
+            break
+        case "hard":
+            if(correctAnswerScore > hardHighscore){
+                hardHighscore = correctAnswerScore;
+                document.cookie = "hardHighscore=" + hardHighscore + ";" 
+            }
+            endHighscore.textContent = "High score: " + hardHighscore
+            break
+    }
+
+
+
 }
 
+document.getElementById("returnHome").onclick = function(){
+    document.getElementById("challengeEnd").style.display = "none"
+    document.getElementById("homescreen").style.display = "flex"
+
+}
+
+document.getElementById("playAgain").onclick = function(){
+
+    switch(difficulty){
+        
+        case "easy":
+            startEasy()
+            break
+        case "normal":
+            startNormal()
+            break
+        case "hard":
+            startHard()
+            break
+    }
+
+}
+
+function getCookies(name){
+
+    let cookieArr = decodeURIComponent(document.cookie).split("; ")
+
+    for(let i = 0; i < cookieArr.length; i++) {
+
+        let cookiePair = cookieArr[i].split("=");
+
+        console.log(cookiePair)
+        console.log(name)
+        
+        if (cookiePair[0] == name){
+            return cookiePair[1]
+        }
+    }
+
+}
 
 
 
