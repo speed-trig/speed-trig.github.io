@@ -154,17 +154,39 @@ let popup = document.getElementById("settingsPopup");
 let icon = document.getElementById("settingsIcon");
 let span = document.getElementsByClassName("close")[0];
 
+let isChanged
+
 icon.onclick = function() {
+
+    isChanged = false
+
     popup.style.display = "block";
+    const checkboxes = document.querySelectorAll('div#settingsPopup input[type="checkbox"]');
+
+    for (var i = 0; i < checkboxes.length; i++) {
+        checkboxes[i].addEventListener('change', function() {
+            isChanged = true;
+        });
+    }
 }
 
 span.onclick = function() {
     popup.style.display = "none";
+
+    if(isChanged == true){
+        nextQuestion()
+        isChanged = false
+    }
 }
 
 window.onclick = function(event) {
     if (event.target == popup) {
         popup.style.display = "none";
+
+        if(isChanged == true){
+            nextQuestion()
+            isChanged = false
+        }
     }
 }
 
@@ -235,7 +257,7 @@ if(isNaN(hardHighscore)){
 }
 
 function setDefaults(){
-    validQuestions = sinQuestions.concat(cosQuestions)
+    updateValidQuestions()
     myQuestion = selectQuestion()
     validAnswers = setAnswers(myQuestion)
     setButtons(myQuestion, validAnswers)
@@ -457,6 +479,25 @@ document.getElementById("selectAll").onclick = function(){
     const checkboxes = document.querySelectorAll('div#settingsPopup input[type="checkbox"]');
     checkboxes.forEach((checkbox) => {checkbox.checked = true;})
 
+    document.getElementById("timer").style.display = "flex"
+    document.getElementById("myScore").style.display = "flex"
+    document.getElementById("accuracy").style.display = "flex"
+
+    isChanged = true
+
+    updateValidQuestions()
+}
+
+document.getElementById("deselectAll").onclick = function(){
+    const checkboxes = document.querySelectorAll('div#settingsPopup input[type="checkbox"]');
+    checkboxes.forEach((checkbox) => {checkbox.checked = false;})
+
+    document.getElementById("timer").style.display = "none"
+    document.getElementById("myScore").style.display = "none"
+    document.getElementById("accuracy").style.display = "none"
+
+    isChanged = true
+
     updateValidQuestions()
 }
 
@@ -568,12 +609,11 @@ function toRadians(degree){
 }
 
 function nextQuestion(){
-   // document.getElementById("correct").innerHTML = ""
+
     myQuestion = selectQuestion()
     validAnswers = setAnswers(myQuestion)
     setButtons(myQuestion, validAnswers)
     displayQuestion(myQuestion)
-
 }
 
 function startTimer() {
@@ -607,11 +647,9 @@ startPractice.onclick = function () {
 
     mode = "practice"
     updateDisplay()
-    
 
     resetInfo();
     setDefaults();
-    updateValidQuestions();
 }
 
 startChallenge.onclick = function() {

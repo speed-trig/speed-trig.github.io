@@ -117,6 +117,9 @@
                             <div class="checkbox-row">
                                 <button id="selectAll">Select All</button>
                             </div>
+                            <div class="checkbox-row">
+                                <button id="deselectAll">Deselect All</button>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -150,8 +153,8 @@
 
     <div id="challengeSelect">
         <div class="center">
-            <h1>Challenge Mode</h1>
-            <p>Try to answer as many questions in one minute!</p>
+            <h1 id="challegeModeTitle" style="font-size: min(5vh, 3vw)">Challenge Mode</h1>
+            <p id="challengeModeInstructions">Try to answer as many questions in one minute!</p>
             <div class="button-row">
                 <div class="button-block">
                     <button class="button" id="easy" onclick="startEasy()"><span>Easy</span></button>
