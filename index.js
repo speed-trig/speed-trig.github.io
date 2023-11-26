@@ -150,6 +150,53 @@ const invCosQuestions = [
     new Question("invCos", "-√3/2", 150)
 ]
 
+const invTanQuestions = [
+    new Question("invTan", "0", 0),
+    new Question("invTan", "√3/3", 30),
+    new Question("invTan", "1", 45),
+    new Question("invTan", "√3", 60),
+    new Question("invTan", "-√3/3", -30),
+    new Question("invTan", "-1", -45),
+    new Question("invTan", "-√3", -60)
+]
+
+const invCotQuestions = [
+    new Question("invCot", "0", 90),
+    new Question("invCot", "√3/3", 60),
+    new Question("invCot", "1", 45),
+    new Question("invCot", "√3", 30),
+    new Question("invCot", "-√3/3", 120),
+    new Question("invCot", "-1", 135),
+    new Question("invCot", "-√3", 150)
+]
+
+const invSecQuestions = [
+    new Question("invSec", "2", 60),
+    new Question("invSec", "√2", 45),
+    new Question("invSec", "2√3/3", 30),
+    new Question("invSec", "1", 0),
+    new Question("invSec", "-1", 180),
+    new Question("invSec", "-2", 120),
+    new Question("invSec", "-√2", 135),
+    new Question("invSec", "-2√3/3", 150)
+]
+
+const invCscQuestions = [
+    new Question("invCsc", "1", 90),
+    new Question("invCsc", "2√3/3", 60),
+    new Question("invCsc", "√2", 45),
+    new Question("invCsc", "2", 30),
+    new Question("invCsc", "-2", -30),
+    new Question("invCsc", "-√2", -45),
+    new Question("invCsc", "-2√3/3", -60),
+    new Question("invCsc", "-1", -90)
+]
+
+
+
+
+
+
 let popup = document.getElementById("settingsPopup");
 let icon = document.getElementById("settingsIcon");
 let span = document.getElementsByClassName("close")[0];
@@ -294,6 +341,18 @@ function setAnswers(question){
         case "invSin":
             questions = invSinQuestions
             break
+        case "invTan":
+            questions = invTanQuestions
+            break
+        case "invCot":
+            questions = invCotQuestions
+            break
+        case "invSec":
+            questions = invSecQuestions
+            break
+        case "invCsc":
+            questions = invCscQuestions
+            break
     }
 
     let answers = [];
@@ -326,7 +385,7 @@ function setButtons(question, answers){
         [possibleAnswers[i], possibleAnswers[j]] = [possibleAnswers[j], possibleAnswers[i]];
     }
 
-    if (question.trig == "invSin" || question.trig == "invCos"){
+    if ((question.trig).includes("inv")){
 
         if(document.getElementById("degrees").checked == true && document.getElementById("radians").checked == true){
             if(Math.random() < 0.5)
@@ -352,19 +411,12 @@ function displayQuestion(question)
 {   
     let angle = question.angle
 
-    if (question.trig == "invSin"){
+    if ((question.trig).includes("inv")){
         
-        let text = "sin<sup>-1</sup>(" + angle + ")"
+        let text = (question.trig).slice(3).toLowerCase() + "<sup>-1</sup>(" + angle + ")"
         trigquestion.innerHTML = text
 
     }
-    
-    else if (question.trig == "invCos"){
-        
-        let text = "cos<sup>-1</sup>(" + angle + ")"
-        trigquestion.innerHTML = text
-
-    } 
 
     else{
         
@@ -443,6 +495,18 @@ function updateValidQuestions(){
     if(document.getElementById("invcos").checked){
         validQuestions = validQuestions.concat(invCosQuestions)
     }
+    if(document.getElementById("invtan").checked){
+        validQuestions = validQuestions.concat(invTanQuestions)
+    }
+    if(document.getElementById("invcot").checked){
+        validQuestions = validQuestions.concat(invCotQuestions)
+    }
+    if(document.getElementById("invsec").checked){
+        validQuestions = validQuestions.concat(invSecQuestions)
+    }
+    if(document.getElementById("invcsc").checked){
+        validQuestions = validQuestions.concat(invCscQuestions)
+    }
 }
 
 document.getElementById("showTimer").onchange = function(){
@@ -505,7 +569,11 @@ function buttonAnswerClick(buttonName){
     let buttonAnswer = document.getElementById(buttonName).textContent
     let correctAnswer = myQuestion.answer
 
-    if (buttonAnswer.includes("π")){
+    let dummyButton1 = document.getElementById("answerButton1").textContent
+    let dummyButton2 = document.getElementById("answerButton2").textContent
+    let dummyButton3 = document.getElementById("answerButton3").textContent
+
+    if (dummyButton1.includes("π") || dummyButton2.includes("π") || dummyButton3.includes("π")){
         correctAnswer = toRadians(correctAnswer)
     }
 
@@ -719,7 +787,7 @@ function startHard() {
     domainIncrease.checked = true
     domainDecrease.checked = true
 
-    validQuestions = sinQuestions.concat(cosQuestions).concat(tanQuestions).concat(cotQuestions).concat(secQuestions).concat(cscQuestions).concat(invCosQuestions).concat(invSinQuestions)
+    validQuestions = sinQuestions.concat(cosQuestions).concat(tanQuestions).concat(cotQuestions).concat(secQuestions).concat(cscQuestions).concat(invCosQuestions).concat(invSinQuestions).concat(invTanQuestions)
     myQuestion = selectQuestion()
     validAnswers = setAnswers(myQuestion)
     setButtons(myQuestion, validAnswers)
