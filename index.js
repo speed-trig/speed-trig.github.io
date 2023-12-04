@@ -194,9 +194,6 @@ const invCscQuestions = [
 
 
 
-
-
-
 let popup = document.getElementById("settingsPopup");
 let icon = document.getElementById("settingsIcon");
 let span = document.getElementsByClassName("close")[0];
@@ -509,33 +506,33 @@ function updateValidQuestions(){
     }
 }
 
-document.getElementById("showTimer").onchange = function(){
+function updateTimeDisplay(){
 
     if(document.getElementById("showTimer").checked){
-        document.getElementById("timer").style.visibility = "visible"
+        document.getElementById("timer").style.display = "flex"
     }
     else{
-        document.getElementById("timer").style.visibility = "hidden"
+        document.getElementById("timer").style.display = "none"
     }
 }
 
-document.getElementById("showAccuracy").onchange = function(){
+function updateAccuracyDisplay(){
 
     if(document.getElementById("showAccuracy").checked){
-        document.getElementById("accuracy").style.visibility = "visible"
+        document.getElementById("accuracy").style.display = "flex"
     }
     else{
-        document.getElementById("accuracy").style.visibility = "hidden"
+        document.getElementById("accuracy").style.display = "none"
     }
 }
 
-document.getElementById("showQuestionNumber").onchange = function(){
+function updateScoreDisplay(){
 
     if(document.getElementById("showQuestionNumber").checked){
-        document.getElementById("myScore").style.visibility = "visible"
+        document.getElementById("myScore").style.display = "flex"
     }
     else{
-        document.getElementById("myScore").style.visibility = "hidden"
+        document.getElementById("myScore").style.display = "none"
     }
 }
 
@@ -552,7 +549,7 @@ document.getElementById("selectAll").onclick = function(){
     updateValidQuestions()
 }
 
-document.getElementById("deselectAll").onclick = function(){
+function deselectAll(){
     const checkboxes = document.querySelectorAll('div#settingsPopup input[type="checkbox"]');
     checkboxes.forEach((checkbox) => {checkbox.checked = false;})
 
@@ -564,6 +561,26 @@ document.getElementById("deselectAll").onclick = function(){
 
     updateValidQuestions()
 }
+
+document.getElementById("resetButton").onclick = function(){
+    
+    deselectAll()
+    document.getElementById("sin").checked = true
+    document.getElementById("cos").checked = true
+    degreeCheck.checked = true
+    radianCheck.checked = true
+    domainNormal.checked = true
+    scoreCheck.checked = true
+    timerCheck.checked = true
+    accuracyCheck.checked = true
+
+    document.getElementById("timer").style.display = "flex"
+    document.getElementById("myScore").style.display = "flex"
+    document.getElementById("accuracy").style.display = "flex"
+
+    updateValidQuestions()
+}
+
 
 function buttonAnswerClick(buttonName){
     let buttonAnswer = document.getElementById(buttonName).textContent
@@ -810,7 +827,7 @@ function resetInfo(){
         totalQuestions = 0
         totalAnswers = 0;
         accuracy = 0
-        document.getElementById("accuracy").innerHTML = ""
+        document.getElementById("accuracy").innerHTML = "100%"
         document.getElementById("myScore").textContent = "#1" 
 
         clearInterval(timeInterval)
@@ -845,7 +862,6 @@ function updateDisplay(){
         document.getElementById("practiceMode").style.display = "flex";
         document.getElementById("settingsIcon").style.display = "flex";
         document.getElementById("accuracy").style.display = "flex"
-        accuracyCheck.checked = true;
 
         exitButton.textContent = "Exit Practice"
         feedback.style.color = "#ffffff"
@@ -944,6 +960,5 @@ function getCookies(name){
     }
 
 }
-
 
 
