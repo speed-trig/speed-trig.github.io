@@ -12,8 +12,8 @@
 
         <h1>Speed Trig Practice</h1>
 
-        <button class="button" style="vertical-align:middle" id="startPractice"><span>Practice Mode </span></button>
-        <button class="button" style="vertical-align:middle" id="startChallenge"><span>Challenge Mode </span></button>
+        <button class="button" style="vertical-align:middle; width: 19vw;" id="startPractice"><span>Practice Mode </span></button>
+        <button class="button" style="vertical-align:middle; width: 19vw; " id="startChallenge"><span>Challenge Mode </span></button>
 
     </div>
 
@@ -98,15 +98,15 @@
                         <div class="checkbox-block">
                             <div class="checkbox-row">
                                 <label for="showTimer">Show timer</label>
-                                <input type="checkbox" id="showTimer" checked="true">
+                                <input type="checkbox" id="showTimer" checked="true" onchange="updateTimeDisplay()">
                             </div>
                             <div class="checkbox-row">
                                 <label for="showQuestionNumber">Show question number</label>
-                                <input type="checkbox" id="showQuestionNumber" checked="true">
+                                <input type="checkbox" id="showQuestionNumber" checked="true" onchange="updateScoreDisplay()">
                             </div>
                             <div class="checkbox-row">
                                 <label for="showAccuracy">Show percent accuracy</label>
-                                <input type="checkbox" id="showAccuracy" checked="true">
+                                <input type="checkbox" id="showAccuracy" checked="true" onchange="updateAccuracyDisplay()">
                             </div>
                             <div class="checkbox-row">
                                 <label for="showFeedback">Show correct answer</label>
@@ -119,7 +119,10 @@
                                 <button id="selectAll">Select All</button>
                             </div>
                             <div class="checkbox-row">
-                                <button id="deselectAll">Deselect All</button>
+                                <button id="deselectAll" onclick="deselectAll()">Deselect All</button>
+                            </div>
+                            <div class="checkbox-row">
+                                <button id="resetButton">Reset</button>
                             </div>
                         </div>
                     </div>
@@ -189,7 +192,6 @@
 
 </body>
 </html>
-
 
 
 
